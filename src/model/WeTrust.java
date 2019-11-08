@@ -19,5 +19,12 @@ public class WeTrust {
 	public final static int ZONE4 = 4;
 	public final static int ZONE5 = 5;
 	
+	public WeTrust() {
+		
+	}
+	
+	public void loadEmployees() {
+		
+	}
 	
 }
