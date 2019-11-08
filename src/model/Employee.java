@@ -77,4 +77,8 @@ public class Employee {
 		this.zone = zone;
 	}
 	
+	public String toString() {
+		return "Name: " + name + "\nLastName: " + lastName + "\nId: " + id + "\nZone: " + zone;
+	}
+	
 }
