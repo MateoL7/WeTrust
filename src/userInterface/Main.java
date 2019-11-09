@@ -15,7 +15,9 @@ public class Main extends Application{
 	public static void main(String[] args){
 		try {
 			WeTrust w = new WeTrust();	
-			System.out.println(Arrays.toString((w.getEmployees()).toArray()));
+//			System.out.println(Arrays.toString((w.getEmployees()).toArray()));
+			w.loadEmployeesTrust();
+			w.recorrer(w.getEmployeesTrust());
 		}catch(IOException e) {
 			System.out.println("Not found");
 		}

@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import myCollections.MatrixGraphEmployees;
+import myCollections.AdjacencyMatrixGraph;
 
 /**
  * Class WeTrust
@@ -20,14 +20,8 @@ import myCollections.MatrixGraphEmployees;
  *
  */
 public class WeTrust {
-
-	public final static int ZONE1 = 1;
-	public final static int ZONE2 = 2;
-	public final static int ZONE3 = 3;
-	public final static int ZONE4 = 4;
-	public final static int ZONE5 = 5;
 	
-	private MatrixGraphEmployees employeesTrust; 
+	private AdjacencyMatrixGraph<Employee> employeesTrust; 
 	private ArrayList<Employee> employees;
 	
 	public WeTrust() throws IOException {
@@ -36,7 +30,7 @@ public class WeTrust {
 	
 	public void loadEmployees() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(new File("data/employees.txt")));
-		employeesTrust = new MatrixGraphEmployees<Employee>(25);
+		employeesTrust = new AdjacencyMatrixGraph<Employee>(false, 25);
 		employees = new ArrayList<Employee>();
 		String line = br.readLine();
 		line = br.readLine();
@@ -46,13 +40,51 @@ public class WeTrust {
 			String lastName = info[1];
 			int id = Integer.parseInt(info[2]);
 			int zone = Integer.parseInt(info[3]);
+			employeesTrust.addVertex((new Employee(name, lastName, id, zone)));
 			employees.add((new Employee(name, lastName, id, zone)));
 			line = br.readLine();
 		}
 		br.close();
 	}
+	public void loadEmployeesTrust() throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(new File("data/trust.txt")));
+		String line = br.readLine();
+		line = br.readLine();
+		while(line != null) {
+			String[] info = line.split(",");
+			int x = Integer.parseInt(info[0]);
+			int y = Integer.parseInt(info[1]);
+			int trust = Integer.parseInt(info[2]);
+			Employee e1 = employees.get(x);
+			Employee e2 = employees.get(y);
+			
+			employeesTrust.addEdge(e1, e2, trust);
+			
+			line = br.readLine();
+		}
+		br.close();
+	}
+	
+	public void recorrer(double[][] m) {
+		for (int x=0; x < m.length; x++) {
+			System.out.print("|");
+			for (int y=0; y < m[x].length; y++) {
+				if(m[x][y] == Integer.MAX_VALUE) {
+					System.out.print("$");
+				}else {
+					System.out.print (m[x][y]);	
+				}
+				if (y!=m[x].length-1) System.out.print("\t");
+			}
+			System.out.println("|");
+		}
+	} 
+	
 	public ArrayList<Employee> getEmployees(){
 		return employees;
+	}
+	public double[][] getEmployeesTrust(){
+		return employeesTrust.weightMatrix();
 	}
 	
 }

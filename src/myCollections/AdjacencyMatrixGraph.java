@@ -16,7 +16,7 @@ import java.util.TreeSet;
  * @author AED Class # 003 // 2019
  * @version 1.0 - 10/2019
  */
-public class MatrixGraphEmployees<Employee> implements IGraph<Employee> {
+public class AdjacencyMatrixGraph<Employee> implements IGraph<Employee> {
 
 	/**
 	 * The length of the matrix when using the default Constructor.
@@ -68,7 +68,7 @@ public class MatrixGraphEmployees<Employee> implements IGraph<Employee> {
 	 * Constructs a new, empty matrix of double values of default length, along with two Map objects that interconnect
 	 * vertices to their indices in the matrix and indices in the matrix to their vertices.
 	 */
-	public MatrixGraphEmployees() {
+	public AdjacencyMatrixGraph() {
 		initialize(DEFAULT_CAPACITY);
 	}
 
@@ -79,7 +79,7 @@ public class MatrixGraphEmployees<Employee> implements IGraph<Employee> {
 	 *
 	 * @param id a boolean that indicates the graph is directed when true.
 	 */
-	public MatrixGraphEmployees(boolean id) {
+	public AdjacencyMatrixGraph(boolean id) {
 		initialize(DEFAULT_CAPACITY);
 		isDirected = id;
 	}
@@ -90,7 +90,7 @@ public class MatrixGraphEmployees<Employee> implements IGraph<Employee> {
 	 *
 	 * @param capacity the initial size of the adjacency matrix
 	 */
-	public MatrixGraphEmployees(int capacity) {
+	public AdjacencyMatrixGraph(int capacity) {
 		initialize(capacity);
 	}
 
@@ -102,7 +102,7 @@ public class MatrixGraphEmployees<Employee> implements IGraph<Employee> {
 	 * @param id       a boolean that indicates the graph is directed when true.
 	 * @param capacity the initial size of the adjacency matrix
 	 */
-	public MatrixGraphEmployees(boolean id, int capacity) {
+	public AdjacencyMatrixGraph(boolean id, int capacity) {
 		initialize(capacity);
 		isDirected = id;
 	}
