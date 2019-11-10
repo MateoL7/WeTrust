@@ -16,8 +16,8 @@ public class Main extends Application{
 		try {
 			WeTrust w = new WeTrust();	
 //			System.out.println(Arrays.toString((w.getEmployees()).toArray()));
-			w.loadEmployeesTrust();
-			w.recorrer(w.getEmployeesTrust());
+			w.loademployeesTrustM();
+			w.recorrer(w.getemployeesTrustM());
 		}catch(IOException e) {
 			System.out.println("Not found");
 		}
