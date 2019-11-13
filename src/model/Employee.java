@@ -1,6 +1,6 @@
 package model;
 /**
- * Class WeTrust
+ * Class Employee
  * @author Mateo Loaiza
  * @author Nicolas Penagos
  * @author Juan Jose Calderon
