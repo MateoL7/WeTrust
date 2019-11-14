@@ -17,11 +17,13 @@ public class Main extends Application{
 			WeTrust w = new WeTrust();	
 //			System.out.println(Arrays.toString((w.getEmployees()).toArray()));
 			w.loademployeesTrustM();
-			w.recorrer(w.getemployeesTrustM());
+		//	w.recorrer(w.getemployeesTrustM());
 		}catch(IOException e) {
 			System.out.println("Not found");
 		}
 		launch(args);
+		
+		
 	}
 	
 	public void start(Stage stage) throws Exception {

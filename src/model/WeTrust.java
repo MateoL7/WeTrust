@@ -92,8 +92,30 @@ public class WeTrust {
 	public ArrayList<Employee> getEmployees(){
 		return employees;
 	}
+	
+	public Employee searchEmployee(int id) {
+		return searchEmployee(id, 0, employees.size());
+	}
+	
+	public Employee searchEmployee(int id, int i, int j) {
+		if(j>=i) {
+			int mid = i + (j-i)/2;
+			Employee currentE = employees.get(mid);
+			
+			if(currentE.getId()==id) {
+				return currentE;
+			}else if(currentE.getId()>id) {
+				return searchEmployee(id, i, mid-1);
+			}else {
+				return searchEmployee(id, mid+1, j);
+			}
+		}else {
+			return null;
+		}
+	}
 //	public double[][] getemployeesTrustM(){
 //		return employeesTrustM.weightMatrix();
 //	}
 	
+
 }
