@@ -22,12 +22,7 @@ public class AdjacencyMatrixGraph<Employee> implements IGraph<Employee> {
 	 * The length of the matrix when using the default Constructor.
 	 */
 	private static final int DEFAULT_CAPACITY = 10;
-
-	/**
-	 * The rate at which the matrix's length increases as it becomes full.
-	 */
-	private static final double GROWTH_FACTOR = 1.5;
-
+	
 	/**
 	 * The last index in the matrix at which a vertex exists.
 	 */
@@ -129,26 +124,7 @@ public class AdjacencyMatrixGraph<Employee> implements IGraph<Employee> {
 	@Override
 	public boolean addVertex(Employee v) {
 		boolean added = false;
-		Integer index;
-		if (verticesIndices.get(v) != null) {
-			if (emptySlots.isEmpty()) {//No reusable rows/columns in the matrix
-				if (size == adjacencyMatrix.length) {//Needs to initialize a bigger array
-					double[][] placeHolder = adjacencyMatrix;
-					int newLength = (int) (adjacencyMatrix.length * GROWTH_FACTOR);
-					adjacencyMatrix = new double[newLength][newLength];
-					for (int i = 0; i < placeHolder.length; i++) {
-						System.arraycopy(placeHolder[i], 0, adjacencyMatrix[i], 0, placeHolder.length);
-					}
-				}
-				size++;
-				index = size - 1;
-			} else {
-				index = emptySlots.pollFirst();//TODO: May assign null?
-			}
-			vertices.put(index, v);
-			verticesIndices.put(v, index);
-			added = true;
-		}
+		
 		return added;
 	}
 

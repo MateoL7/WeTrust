@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import myCollections.AdjacencyMatrixGraph;
+import myCollections.IGraph;
 
 /**
  * Class WeTrust
@@ -21,7 +22,7 @@ import myCollections.AdjacencyMatrixGraph;
  */
 public class WeTrust {
 	
-	private AdjacencyMatrixGraph<Employee> employeesTrustM; 
+	private IGraph<Employee> employeesTrust; 
 //	private AdjacencyListGraph<Employee> employeesTrustL; 
 	private ArrayList<Employee> employees;
 	
@@ -31,7 +32,7 @@ public class WeTrust {
 	
 	public void loadEmployees() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(new File("data/employees.txt")));
-		employeesTrustM = new AdjacencyMatrixGraph<Employee>(false, 25);
+		
 		employees = new ArrayList<Employee>();
 		String line = br.readLine();
 		line = br.readLine();
@@ -41,12 +42,19 @@ public class WeTrust {
 			String lastName = info[1];
 			int id = Integer.parseInt(info[2]);
 			int zone = Integer.parseInt(info[3]);
-			employeesTrustM.addVertex((new Employee(name, lastName, id, zone)));
+
 			employees.add((new Employee(name, lastName, id, zone)));
 			line = br.readLine();
 		}
 		br.close();
 	}
+	
+	public void chooseS(boolean which) {
+		if(which) {
+			employeesTrust = new AdjacencyMatrixGraph<Employee>();
+		}
+	}
+	
 	public void loademployeesTrustM() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(new File("data/trust.txt")));
 		String line = br.readLine();
@@ -59,7 +67,7 @@ public class WeTrust {
 			Employee e1 = employees.get(x);
 			Employee e2 = employees.get(y);
 			
-			employeesTrustM.addEdge(e1, e2, trust);
+			employeesTrust.addEdge(e1, e2, trust);
 			
 			line = br.readLine();
 		}
@@ -84,8 +92,8 @@ public class WeTrust {
 	public ArrayList<Employee> getEmployees(){
 		return employees;
 	}
-	public double[][] getemployeesTrustM(){
-		return employeesTrustM.weightMatrix();
-	}
+//	public double[][] getemployeesTrustM(){
+//		return employeesTrustM.weightMatrix();
+//	}
 	
 }
