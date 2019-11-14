@@ -84,7 +84,7 @@ public class AdjacencyListGraph<V> implements IGraph<V>{
 	private boolean searchVertex(V v) {
 		return vertices.containsValue(v);
 	}
-
+	/*
 	@Override
 	public void addEdge(V u, V v) {
 		// TODO Auto-generated method stub
@@ -101,12 +101,13 @@ public class AdjacencyListGraph<V> implements IGraph<V>{
 		}
 		
 	}
+	/*
 
 	@Override
 	public void addEdge(V u, V v, double w) {
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
 
 	@SuppressWarnings("unlikely-arg-type")
 	@Override
@@ -138,12 +139,12 @@ public class AdjacencyListGraph<V> implements IGraph<V>{
 	public void removeEdge(V u, V v) {
 		// TODO Auto-generated method stub
 	}
-
+	/*
 	@Override
 	public List<V> vertexAdjacent(V v) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	@Override
 	public boolean areConnected(V u, V v) {
@@ -163,7 +164,7 @@ public class AdjacencyListGraph<V> implements IGraph<V>{
 		}
 		
 	}
-
+	/*
 	@Override
 	public double[][] weightMatrix() {
 		// TODO Auto-generated method stub
@@ -191,7 +192,7 @@ public class AdjacencyListGraph<V> implements IGraph<V>{
 	public List<List<V>> getAdjacencyList(){		
 		return adjacencyLists;		
 	}
-
+	/*
 	@Override
 	public int getIndex(V u) {
 		return vertices.get(u);
@@ -200,5 +201,17 @@ public class AdjacencyListGraph<V> implements IGraph<V>{
 	@Override
 	public int getVertexSize() {
 		return vertices.size();
-	}	
+	}	*/
+
+	@Override
+	public void addEdge(V u, V v, int w) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public V search(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
