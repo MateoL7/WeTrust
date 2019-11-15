@@ -56,4 +56,6 @@ public interface IGraph<T> {
 	 * @return The vertex matching the id
 	 */
 	public T search(int id);
+
+	
 }

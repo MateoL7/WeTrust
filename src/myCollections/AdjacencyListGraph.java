@@ -22,7 +22,7 @@ public class AdjacencyListGraph<V> implements IGraph<V>{
 	/**
 	 * A list for each Vertex within the graph which has a list with all its adjacent Vertices 
 	 */
-	private List<List<V>> adjacencyLists;
+	private List<List<Pair<V, Integer>>> adjacencyLists;
 	
 	/**
 	 * Property that say if a graph is directed or not
@@ -52,10 +52,11 @@ public class AdjacencyListGraph<V> implements IGraph<V>{
 	 */
 	private final void initialize() {
 		isDirected = false;
-		adjacencyLists = new ArrayList<List<V>>();
+		adjacencyLists = new ArrayList<List<Pair<V, Integer>>>();
 		vertices = new HashMap<V, Integer>();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean addVertex(V v) {
 		boolean added = false;
@@ -63,13 +64,14 @@ public class AdjacencyListGraph<V> implements IGraph<V>{
 		if(!searchVertex(v)) {
 			@SuppressWarnings("unchecked")
 			// Create a new empty list for that vertex
-			List<V> vList = (List<V>) new ArrayList<Object>();
 			// Get the position for this new vertex
+			List<Pair<V, Integer>> vList = (List<Pair<V, Integer>>) new ArrayList<Pair<V, Integer>>();
 			int index = adjacencyLists.size();
 			// Add the vertex to the map
 			vertices.put(v, index);
 			// Add the vertex empty list to the adjacencyLists
 			adjacencyLists.add(vList);
+			vList.add(new Pair<V, Integer>(v, 0));
 			// Change the value to true indicating that it was possible to add the vertex
 			added = true;
 		}
@@ -84,30 +86,10 @@ public class AdjacencyListGraph<V> implements IGraph<V>{
 	private boolean searchVertex(V v) {
 		return vertices.containsValue(v);
 	}
-	/*
-	@Override
-	public void addEdge(V u, V v) {
-		// TODO Auto-generated method stub
 	
-		int ValueU = vertices.get(u);
-		int ValueV = vertices.get(v);
-		
-		if(!isDirected) {
-			adjacencyLists.get(ValueU).add(v);
-			adjacencyLists.get(ValueV).add(u);
-		}else {
-			
-			adjacencyLists.get(ValueU).add(v);
-		}
-		
-	}
-	/*
+	
 
-	@Override
-	public void addEdge(V u, V v, double w) {
-		// TODO Auto-generated method stub
-		
-	}*/
+
 
 	@SuppressWarnings("unlikely-arg-type")
 	@Override
@@ -118,7 +100,7 @@ public class AdjacencyListGraph<V> implements IGraph<V>{
 			
 			// remove the existing list which represents the adjacent vertices of the vertex to remove
 			adjacencyLists.remove(vertices.get(v));
-			
+		
 			// remove any existing connection to the vertex
 			for(int i=0; i<adjacencyLists.size(); i++) {
 				if(adjacencyLists.get(i).contains(v)) adjacencyLists.get(i).remove(i);
@@ -189,7 +171,7 @@ public class AdjacencyListGraph<V> implements IGraph<V>{
 	 *
 	 * @return The graph. A list with lists of vertices and its adjacent vertices
 	 */
-	public List<List<V>> getAdjacencyList(){		
+	public List<List<Pair<V, Integer>>> getAdjacencyList(){		
 		return adjacencyLists;		
 	}
 	/*
@@ -207,6 +189,24 @@ public class AdjacencyListGraph<V> implements IGraph<V>{
 	public void addEdge(V u, V v, int w) {
 		// TODO Auto-generated method stub
 		
+		//	System.out.println("u "+u);
+		int ValueU = vertices.get(u);
+	//	System.out.println("v "+v);
+		int ValueV = vertices.get(v);
+	//	System.out.println("ValueU "+ValueU);
+	//	System.out.println("ValueV "+ValueV);
+		if(!isDirected) {
+		
+	//		System.out.println("is Directed");
+			adjacencyLists.get(ValueU).add(new Pair<V, Integer>(v, w));
+	//		System.out.println(adjacencyLists.get(ValueU));
+			adjacencyLists.get(ValueV).add(new Pair<V, Integer>(u, w));
+		
+		}else {
+			//adjacencyLists.get(ValueU).add(v);
+		
+		}
+		
 	}
 
 	@Override
@@ -214,4 +214,22 @@ public class AdjacencyListGraph<V> implements IGraph<V>{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public String printGrahp() {
+		String graphR = "";
+		for (int i = 0; i < adjacencyLists.size(); i++) {
+			ArrayList<Pair<V, Integer>> arrayL = (ArrayList<Pair<V, Integer>>) adjacencyLists.get(i);
+			for (int j = 0; j < arrayL.size(); j++) {
+				if(j==0){
+				 graphR+=""+arrayL.get(j).getFirst()+","+arrayL.get(j).getSecond()+" : ";
+				}else {
+					 graphR+=""+arrayL.get(j).getFirst()+","+arrayL.get(j).getSecond()+" ";
+				}
+			}
+			graphR += "\n";
+		}
+		
+		return graphR;
+	}
 }
+

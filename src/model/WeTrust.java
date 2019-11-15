@@ -113,9 +113,9 @@ public class WeTrust {
 			return null;
 		}
 	}
-//	public double[][] getemployeesTrustM(){
-//		return employeesTrustM.weightMatrix();
-//	}
+   // public double[][] getemployeesTrustM(){
+	//	return employeesTrustM.weightMatrix();	
+	//}
 	
 
 }
