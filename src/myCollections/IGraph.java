@@ -24,7 +24,7 @@ public interface IGraph<T> {
 	 * @param v a vertex within the graph
 	 * @param w	is the weight of the edge
 	 */
-	public void addEdge(T u, T v, int w);
+	public void addEdge(T u, T v, double w);
 	
 	/**
 	 * Removes a vertex within the graph

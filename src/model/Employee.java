@@ -12,13 +12,11 @@ public class Employee {
 	private String name;
 	private String lastName;
 	private int id;
-	private int zone;
 	
-	public Employee(String name, String lastName, int id, int zone) {
+	public Employee(int id, String name, String lastName) {
 		this.name = name;
 		this.lastName = lastName;
 		this.id = id;
-		this.zone = zone;
 	}
 
 	/**
@@ -62,23 +60,9 @@ public class Employee {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	/**
-	 * @return the zone
-	 */
-	public int getZone() {
-		return zone;
-	}
-
-	/**
-	 * @param zone the zone to set
-	 */
-	public void setZone(int zone) {
-		this.zone = zone;
-	}
 	
 	public String toString() {
-		return "Name: " + name + "\nLastName: " + lastName + "\nId: " + id + "\nZone: " + zone;
+		return id + "," + name + "," + lastName;
 	}
 	
 }

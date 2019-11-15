@@ -20,7 +20,7 @@ public class AdjacencyMatrixGraph<T> implements IGraph<T> {
 	/**
 	 * The length of the matrix when using the default Constructor.
 	 */
-	private static final int DEFAULT_CAPACITY = 10;
+	private static final int DEFAULT_CAPACITY = 25;
 
 	/**
 	 * The last index in the matrix at which a vertex exists.
@@ -81,7 +81,17 @@ public class AdjacencyMatrixGraph<T> implements IGraph<T> {
 	@Override
 	public boolean addVertex(T v) {
 		boolean added = false;
-
+		if(!vertices.containsValue(v)) {
+			if(vertices.isEmpty()) {
+				vertices.put(0, v);
+				verticesIndices.put(v, 0);
+			}else {
+				int newKey = vertices.size();
+				vertices.put(newKey, v);
+				verticesIndices.put(v, newKey);
+			}
+			added = true;
+		}
 		return added;
 	}
 
@@ -94,10 +104,16 @@ public class AdjacencyMatrixGraph<T> implements IGraph<T> {
 	 * @param w is the weight of the edge between 'u' and 'v'
 	 */
 	@Override
-	public void addEdge(T u, T v, int w) {
-		int x = verticesIndices.get(u);//TODO: check pre-conditions
-		int y = verticesIndices.get(v);
-		adjacencyMatrix[x][y] = w;
+	public void addEdge(T u, T v, double w) {
+		if(verticesIndices.get(u) != null && verticesIndices.get(v)!= null) {
+			int x = verticesIndices.get(u);
+			int y = verticesIndices.get(v);
+			adjacencyMatrix[x][y] = w;
+			adjacencyMatrix[y][x] = w;
+		}
+		else {
+			System.out.println("NULL");
+		}
 	}
 
 	/**
