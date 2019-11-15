@@ -76,7 +76,7 @@ public class WeTrust {
 			
 			first = (int) Math.random()*amount + (first+1);
 			second = (int) Math.random()*amount + (second+1);
-			weight = Math.random()*60;
+			weight = Math.random()*900;
 			
 			times++;
 		}
