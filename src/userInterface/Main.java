@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.WeTrust;
+import myCollections.AdjacencyListGraph;
 //import myCollections.AdjacencyListGraph;
 import myCollections.AdjacencyMatrixGraph;
 
@@ -20,12 +21,7 @@ public class Main extends Application{
 
 			WeTrust w = new WeTrust();	
 
-			//		    AdjacencyMatrixGraph<Integer> g1 = new AdjacencyMatrixGraph<>();
-			//			g1.addVertex(1);
-			//			g1.addVertex(2);
-			//			g1.addVertex(3);
-			//			g1.addEdge(1, 1, 5);
-
+			
 
 			w.chooseS(true);
 			
@@ -38,19 +34,19 @@ public class Main extends Application{
 		}catch(IOException e) {
 			System.out.println("Not found");
 		}
-		//		
-		//		AdjacencyListGraph<Integer> g = new AdjacencyListGraph<Integer>(false);
-		//		g.addVertex(1);
-		//		g.addVertex(2);
-		//		g.addVertex(3);
-		//		
-		//		g.addEdge(1, 2, 5);
-		//		
-		//		
-		//		
-		//		
-		//	
-		//		System.out.println(g.printGrahp());
+		
+		AdjacencyListGraph<Integer> g = new AdjacencyListGraph<Integer>(false);
+		g.addVertex(1);
+		g.addVertex(2);
+		g.addVertex(3);
+		
+		g.addEdge(1, 2, 5.0);
+		//g.removeVertex(2);
+		//g.removeEdge(1, 2);
+		
+		System.out.println(g.toString());
+		System.out.println();
+		System.out.println();
 		launch(args);
 
 
