@@ -14,6 +14,8 @@ import java.util.ArrayList;
 //import myCollections.AdjacencyListGraph;
 import myCollections.AdjacencyMatrixGraph;
 import myCollections.IGraph;
+import myExceptions.EmployeeAlreadyCreatedException;
+import myExceptions.EmployeeNotRegisteredException;
 
 /**
  * Class WeTrust
@@ -51,7 +53,7 @@ public class WeTrust {
 		br.close();
 	}
 	
-	public void chooseS(boolean which) {
+	public void chooseS(boolean which, int tam) {
 		if(which) {
 			employeesTrust = new AdjacencyMatrixGraph<Employee>();
 		}else {
@@ -74,8 +76,8 @@ public class WeTrust {
 			
 			pr1.write(first + "," + second + "," + weight + "\n");
 			
-			first = (int) Math.random()*amount + (first+1);
-			second = (int) Math.random()*amount + (second+1);
+			first = (int) Math.random()*amount + first+1;
+			second = (int) Math.random()*amount + second+1;
 			weight = Math.random()*900;
 			
 			times++;
@@ -85,7 +87,7 @@ public class WeTrust {
 		
 	}
 	
-	public void loademployeesTrustM() throws IOException {
+	public void loademployeesTrustM() throws IOException, EmployeeAlreadyCreatedException, EmployeeNotRegisteredException {
 		BufferedReader br = new BufferedReader(new FileReader(new File("data/trust.txt")));
 		String line = br.readLine();
 		line = br.readLine();

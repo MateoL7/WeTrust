@@ -1,5 +1,7 @@
 package myCollections;
 
+import myExceptions.EmployeeAlreadyCreatedException;
+import myExceptions.EmployeeNotRegisteredException;
 
 /**
  * This interface has the minimum and general features that a graph should implement no matter which would be its representation.
@@ -13,8 +15,9 @@ public interface IGraph<T> {
 	 * Adds a vertex to the graph
 	 * @param v The new vertex to be added
 	 * @return True if was added and false if it was already in the graph
+	 * @throws EmployeeAlreadyCreatedException 
 	 */
-	public boolean addVertex(T v);
+	public boolean addVertex(T v) throws EmployeeAlreadyCreatedException;
 	
 	/**
 	 * Adds a weighted edge to the graph
@@ -23,8 +26,9 @@ public interface IGraph<T> {
 	 * @param u a vertex within the graph
 	 * @param v a vertex within the graph
 	 * @param w	is the weight of the edge
+	 * @throws EmployeeNotRegisteredException 
 	 */
-	public void addEdge(T u, T v, double w);
+	public void addEdge(T u, T v, double w) throws EmployeeNotRegisteredException;
 	
 	/**
 	 * Removes a vertex within the graph

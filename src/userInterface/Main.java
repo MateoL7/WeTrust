@@ -12,6 +12,8 @@ import model.WeTrust;
 import myCollections.AdjacencyListGraph;
 //import myCollections.AdjacencyListGraph;
 import myCollections.AdjacencyMatrixGraph;
+import myExceptions.EmployeeAlreadyCreatedException;
+import myExceptions.EmployeeNotRegisteredException;
 
 public class Main extends Application{
 
@@ -23,11 +25,18 @@ public class Main extends Application{
 
 			
 
-			w.chooseS(true);
+			int num = 3;
 			
-			w.generateEmployees(3);
+			w.chooseS(true,num);
 			
-			w.loademployeesTrustM();
+			w.generateEmployees(num);
+			
+			try {
+				w.loademployeesTrustM();
+			} catch (EmployeeAlreadyCreatedException | EmployeeNotRegisteredException e) {
+				
+				e.printStackTrace();
+			}
 			w.recorrer(w.getemployeesTrustM());
 
 

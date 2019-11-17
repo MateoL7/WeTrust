@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
+import myExceptions.EmployeeAlreadyCreatedException;
+import myExceptions.EmployeeNotRegisteredException;
+
 /**
  * An Object that models a graph using an Adjacency Matrix.
  *
@@ -79,7 +82,7 @@ public class AdjacencyMatrixGraph<T> implements IGraph<T> {
 	 * @return true if the vertex did not already exist in the graph
 	 */
 	@Override
-	public boolean addVertex(T v) {
+	public boolean addVertex(T v) throws EmployeeAlreadyCreatedException {
 		boolean added = false;
 		if(!vertices.containsValue(v)) {
 			if(vertices.isEmpty()) {
@@ -91,6 +94,8 @@ public class AdjacencyMatrixGraph<T> implements IGraph<T> {
 				verticesIndices.put(v, newKey);
 			}
 			added = true;
+		}else {
+			throw new EmployeeAlreadyCreatedException();
 		}
 		return added;
 	}
@@ -102,9 +107,10 @@ public class AdjacencyMatrixGraph<T> implements IGraph<T> {
 	 * @param u a vertex within the graph
 	 * @param v a vertex within the graph
 	 * @param w is the weight of the edge between 'u' and 'v'
+	 * @throws EmployeeNotRegisteredException 
 	 */
 	@Override
-	public void addEdge(T u, T v, double w) {
+	public void addEdge(T u, T v, double w) throws EmployeeNotRegisteredException {
 		if(verticesIndices.get(u) != null && verticesIndices.get(v)!= null) {
 			int x = verticesIndices.get(u);
 			int y = verticesIndices.get(v);
@@ -112,7 +118,7 @@ public class AdjacencyMatrixGraph<T> implements IGraph<T> {
 			adjacencyMatrix[y][x] = w;
 		}
 		else {
-			System.out.println("NULL");
+			throw new EmployeeNotRegisteredException();
 		}
 	}
 
