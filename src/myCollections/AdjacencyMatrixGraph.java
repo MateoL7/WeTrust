@@ -114,6 +114,10 @@ public class AdjacencyMatrixGraph<T> implements IGraph<T> {
 		if(verticesIndices.get(u) != null && verticesIndices.get(v)!= null) {
 			int x = verticesIndices.get(u);
 			int y = verticesIndices.get(v);
+			if(x == y) {
+				adjacencyMatrix[x][y] = 0;
+				adjacencyMatrix[y][x] = 0;	
+			}
 			adjacencyMatrix[x][y] = w;
 			adjacencyMatrix[y][x] = w;
 		}
@@ -131,7 +135,12 @@ public class AdjacencyMatrixGraph<T> implements IGraph<T> {
 	@Override
 	public boolean removeVertex(T v) {
 		boolean removed = false;
-
+		if(verticesIndices.containsKey(v)) {
+			int key = verticesIndices.get(v);
+			verticesIndices.remove(v);
+			vertices.remove(key);
+			removed = true;
+		}
 		return removed;
 	}
 
@@ -157,10 +166,15 @@ public class AdjacencyMatrixGraph<T> implements IGraph<T> {
 	 */
 	@Override
 	public boolean areConnected(T u, T v) {
-		int uValor = verticesIndices.get(u);//TODO: check if 'u' and 'v' exist in the graph
+		boolean exist = (u != null && v != null);
+		if(exist) {
+		int uValor = verticesIndices.get(u);
 		int vValor = verticesIndices.get(v);
 
-		return adjacencyMatrix[uValor][vValor] != 0 && adjacencyMatrix[vValor][uValor] != 0;
+		return adjacencyMatrix[uValor][vValor] <= 800 && adjacencyMatrix[vValor][uValor] <= 800;
+		}else {
+			return exist;
+		}
 
 	}
 

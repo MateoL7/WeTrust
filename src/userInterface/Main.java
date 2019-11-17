@@ -23,39 +23,41 @@ public class Main extends Application{
 
 			WeTrust w = new WeTrust();	
 
-			
 
-			int num = 3;
-			
+
+			int num = 4;
+
 			w.chooseS(true,num);
-			
+			w.loadEmployees();
 			w.generateEmployees(num);
-			
-			try {
-				w.loademployeesTrustM();
-			} catch (EmployeeAlreadyCreatedException | EmployeeNotRegisteredException e) {
-				
-				e.printStackTrace();
-			}
-			w.recorrer(w.getemployeesTrustM());
+			w.generateEmployeesTrust();
+			w.loademployeesTrust();
 
 
+			w.recorrer(w.getemployeesTrust());
 		}catch(IOException e) {
 			System.out.println("Not found");
+		} catch (EmployeeAlreadyCreatedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-		
-		AdjacencyListGraph<Integer> g = new AdjacencyListGraph<Integer>(false);
-		g.addVertex(1);
-		g.addVertex(2);
-		g.addVertex(3);
-		
-		g.addEdge(1, 2, 5.0);
-		//g.removeVertex(2);
-		//g.removeEdge(1, 2);
-		
-		System.out.println(g.toString());
-		System.out.println();
-		System.out.println();
+			catch (EmployeeNotRegisteredException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+//		AdjacencyListGraph<Integer> g = new AdjacencyListGraph<Integer>(false);
+//		g.addVertex(1);
+//		g.addVertex(2);
+//		g.addVertex(3);
+//
+//		g.addEdge(1, 2, 5.0);
+//		//g.removeVertex(2);
+//		//g.removeEdge(1, 2);
+//
+//		System.out.println(g.toString());
+//		System.out.println();
+//		System.out.println();
 		launch(args);
 
 
