@@ -240,5 +240,40 @@ public class AdjacencyMatrixGraph<T> implements IGraph<T> {
 		}
 		return found;
 	}
+	
+	
+	public double[][] FloydWarshall(double[][] W) {
+		
+		int n = W.length;
+		double[][] D = W;
+		double v = 0;
+		
+		for(int k=0; k<n; k++) {
+			for(int i=0; i<n; i++) {
+				for(int j=0; j<n; j++) {
+					
+					if(j != k || i != k) {
+						
+						if(D[i][k] != Integer.MAX_VALUE && D[k][j] != Integer.MAX_VALUE) {
+							
+							v = D[i][k] + D[k][j];
+							
+							if(D[i][j] > v) D[i][j] = v;
+							
+						}
+						
+					}
+					
+				}
+			}
+		}
+		
+		return D;
+		
+	}
+	
+	
+	
+	
 
 }

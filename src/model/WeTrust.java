@@ -83,7 +83,7 @@ public class WeTrust {
 		PrintWriter pr1 = new PrintWriter(new File("data/trust.txt"));
 		double weight = Math.random()*900;
 		String line = br.readLine();
-		int counter = -1;
+		int counter = 0;
 		while(line != null) {
 			counter++;
 			line = br.readLine();
@@ -93,8 +93,11 @@ public class WeTrust {
 		int id2 = ran.nextInt(id1+1);
 		for(int i = 0; i < counter*10; i++) {
 			if(id1 != id2) {
+				if(weight > 500) {
+					weight = Integer.MAX_VALUE;
+				}
 				pr1.write(id1 + "," + id2 + "," + weight +"\n");
-				weight = Math.random()*900;	
+				weight = Math.random()*900+100;	
 			}else {
 				
 			}
@@ -124,11 +127,11 @@ public class WeTrust {
 		br.close();
 	}
 
-	public void recorrer(double[][] m) {
+	public void showMatrix(double[][] m) {
 		for (int x=0; x < m.length; x++) {
 			System.out.print("|");
 			for (int y=0; y < m[x].length; y++) {
-				if(m[x][y] >= 700) {
+				if(m[x][y] >= 900) {
 					System.out.print("$");
 				}else if(x == y){
 					System.out.print (0.0);	
@@ -176,5 +179,9 @@ public class WeTrust {
 
 	public ArrayList<Employee> getBFS(Employee e) {
 		return ((AdjacencyMatrixGraph<Employee>) employeesTrust).BFS(e);
+	}
+	
+	public double[][] FloydWarshall(){
+		return (((AdjacencyMatrixGraph<Employee>) employeesTrust).FloydWarshall(getemployeesTrust()));
 	}
 }

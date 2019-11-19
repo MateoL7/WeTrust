@@ -27,7 +27,7 @@ public class Main extends Application{
 
 
 
-			int num = 4;
+			int num = 5;
 
 			w.chooseS(true,num);
 			w.loadEmployees();
@@ -36,8 +36,13 @@ public class Main extends Application{
 			w.loademployeesTrust();
 
 
-			w.recorrer(w.getemployeesTrust());
-			
+			System.out.println("Graph");
+			w.showMatrix(w.getemployeesTrust());
+			System.out.println("-------------------------------------------------");
+			System.out.println("Floyd-Warshall");
+			w.showMatrix(w.FloydWarshall());
+			System.out.println("-------------------------------------------------");
+			System.out.println("BFS");
 			ArrayList<Employee> BFS = w.getBFS(w.getEmployees().get(0));
 			
 			System.out.println(Arrays.toString(BFS.toArray()));

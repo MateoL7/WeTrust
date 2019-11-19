@@ -96,7 +96,7 @@ public class GUIController {
 					mat += ("\n");
 				}
 				lbMatrix.setText(mat);
-				wt.recorrer(wt.getemployeesTrust());
+				wt.showMatrix(wt.getemployeesTrust());
 				
 			}else if(resulType.get() == buttonTypeTwo) {
 				MorL = false;
