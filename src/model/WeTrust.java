@@ -131,7 +131,7 @@ public class WeTrust {
 		for (int x=0; x < m.length; x++) {
 			System.out.print("|");
 			for (int y=0; y < m[x].length; y++) {
-				if(m[x][y] >= 900) {
+				if(m[x][y] == Integer.MAX_VALUE) {
 					System.out.print("$");
 				}else if(x == y){
 					System.out.print (0.0);	
