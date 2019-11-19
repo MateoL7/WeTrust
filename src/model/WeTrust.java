@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import myCollections.AdjacencyListGraph;
@@ -168,6 +169,12 @@ public class WeTrust {
 	public double[][] getemployeesTrust(){
 		return ((AdjacencyMatrixGraph<Employee>) employeesTrust).getMatrix();	
 	}
+	public String getEmployeesTrustL() {
+		return ((AdjacencyListGraph<Employee>) employeesTrust).toString();
+	}
 
 
+	public ArrayList<Employee> getBFS(Employee e) {
+		return ((AdjacencyMatrixGraph<Employee>) employeesTrust).BFS(e);
+	}
 }

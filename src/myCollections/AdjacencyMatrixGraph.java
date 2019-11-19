@@ -1,11 +1,15 @@
 package myCollections;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.NavigableSet;
+import java.util.Queue;
 import java.util.TreeSet;
 
 import myExceptions.EmployeeAlreadyCreatedException;
@@ -172,10 +176,21 @@ public class AdjacencyMatrixGraph<T> implements IGraph<T> {
 		int vValor = verticesIndices.get(v);
 
 		return adjacencyMatrix[uValor][vValor] <= 800 && adjacencyMatrix[vValor][uValor] <= 800;
+		
 		}else {
 			return exist;
 		}
 
+	}
+	
+	public List<T> adjacents(T vertex){
+		List<T> adjacents = new ArrayList<T>();
+		for(Map.Entry<Integer, T> entry : vertices.entrySet()){
+			if(areConnected(vertex, entry.getValue())) {
+				adjacents.add(entry.getValue());
+			}
+		}
+		return adjacents;
 	}
 
 	/**
@@ -192,6 +207,38 @@ public class AdjacencyMatrixGraph<T> implements IGraph<T> {
 	public T search(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public ArrayList<T> BFS(T vertex) {
+		ArrayList<T> result = new ArrayList<>();
+		Queue<T> options = new LinkedList<>();
+		
+		
+		
+		result.add(vertex);
+		options.add(vertex);
+		
+		while(!options.isEmpty()) {
+			T actual = options.poll();
+			if(!searchAux(result, actual)) {
+				result.add(actual);
+			}
+			ArrayList<T> adj = (ArrayList<T>) adjacents(actual);
+			for(int i = 0; i < adj.size(); i++) {
+				if(!searchAux(result, adj.get(i))) {
+					options.add(adj.get(i));	
+				}
+			}
+		}
+		return result;
+	}
+	
+	public boolean searchAux(ArrayList<T> ar, T ver) {
+		boolean found = false;
+		for(int i = 0; i < ar.size() && !found; i++) {
+			if(ver.equals(ar.get(i))) found = true;
+		}
+		return found;
 	}
 
 }

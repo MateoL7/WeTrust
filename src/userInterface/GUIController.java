@@ -57,6 +57,11 @@ public class GUIController {
 
 	public void generate() {
 		try {
+			
+			
+		
+			
+			
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Data Structure");
 			alert.setHeaderText("Choose the data structure you want");
@@ -68,32 +73,43 @@ public class GUIController {
 			Optional<ButtonType> resulType = alert.showAndWait();
 			if(resulType.get() == buttonTypeOne) {
 				MorL = true;
+				int num = Integer.parseInt(numOfEmp.getText());
+				wt.chooseS(MorL, num);
+				wt.generateEmployees(num);
+				wt.generateEmployeesTrust();
+				wt.loademployeesTrust();
+				
+				double matrix[][] = wt.getemployeesTrust();
+				String mat = "";
+				for (int x=0; x < matrix.length; x++) {
+					for (int y=0; y < matrix[x].length; y++) {
+						if(matrix[x][y] >= 700) {
+							mat += ("|$|");
+						}else if(x == y){
+							mat += ("|" + 0.0+ "|");	
+						}
+						else {
+							mat += ("|" + matrix[x][y] + "|");
+						}
+						if (y!=matrix[x].length-1) mat +=("\t\t\t");
+					}
+					mat += ("\n");
+				}
+				lbMatrix.setText(mat);
+				wt.recorrer(wt.getemployeesTrust());
+				
 			}else if(resulType.get() == buttonTypeTwo) {
 				MorL = false;
+				int num = Integer.parseInt(numOfEmp.getText());
+				wt.chooseS(MorL, num);
+				wt.generateEmployees(num);
+				wt.generateEmployeesTrust();
+				wt.loademployeesTrust();
+				
+				lbMatrix.setText(wt.getEmployeesTrustL());
 			}
-			int num = Integer.parseInt(numOfEmp.getText());
-			wt.chooseS(MorL, num);
-			wt.generateEmployees(num);
-			wt.generateEmployeesTrust();
-			wt.loademployeesTrust();
-			double matrix[][] = wt.getemployeesTrust();
-			String mat = "";
-			for (int x=0; x < matrix.length; x++) {
-				for (int y=0; y < matrix[x].length; y++) {
-					if(matrix[x][y] >= 700) {
-						mat += ("|$|");
-					}else if(x == y){
-						mat += ("|" + 0.0+ "|");	
-					}
-					else {
-						mat += ("|" + matrix[x][y] + "|");
-					}
-					if (y!=matrix[x].length-1) mat +=("\t\t\t");
-				}
-				mat += ("\n");
-			}
-			lbMatrix.setText(mat);
-			wt.recorrer(wt.getemployeesTrust());
+			
+		
 
 		}catch(NumberFormatException e) {
 			Alert exception = new Alert(AlertType.ERROR);
