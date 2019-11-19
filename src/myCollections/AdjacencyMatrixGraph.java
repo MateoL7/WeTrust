@@ -22,7 +22,7 @@ import myExceptions.EmployeeNotRegisteredException;
  * @author AED Class # 003 // 2019
  * @version 1.0 - 10/2019
  */
-public class AdjacencyMatrixGraph<T> implements IGraph<T> {
+public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> {
 
 	/**
 	 * The length of the matrix when using the default Constructor.

@@ -28,7 +28,7 @@ import myExceptions.EmployeeNotRegisteredException;
  * 
  *
  */
-public class WeTrust {
+public class WeTrust{
 
 	private IGraph<Employee> employeesTrust; 
 	//	private AdjacencyListGraph<Employee> employeesTrustL; 

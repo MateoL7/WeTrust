@@ -7,7 +7,7 @@ package model;
  * 
  *
  */
-public class Employee {
+public class Employee implements Comparable<Employee>{
 	
 	private String name;
 	private String lastName;
@@ -63,6 +63,12 @@ public class Employee {
 	
 	public String toString() {
 		return id + "," + name + "," + lastName;
+	}
+
+	@Override
+	public int compareTo(Employee o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

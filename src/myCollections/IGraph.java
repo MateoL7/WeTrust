@@ -9,7 +9,7 @@ import myExceptions.EmployeeNotRegisteredException;
  * @version 1.0 - 10/2019
  * @param <V> Abstract data type which represents an object from a natural problem that is going to be modeled as a vertex in a graph representation of the problem
  */
-public interface IGraph<T> {
+public interface IGraph<T extends Comparable<T>> {
 	
 	/**
 	 * Adds a vertex to the graph

@@ -14,7 +14,7 @@ import java.util.Map;
  *        problem that is going to be modeled as a vertex in a graph
  *        representation of the problem
  */
-public class AdjacencyListGraph<V> implements IGraph<V> {
+public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 
 	/**
 	 * Map with all the vertices within the graph. Key of the map is the Vertex and
@@ -245,7 +245,7 @@ public class AdjacencyListGraph<V> implements IGraph<V> {
 			msg += " " + adjacencyLists.get(i).getFirst() + " : ";
 			for (int j = 0; j < adjacencyLists.get(i).getSecond().size(); j++) {
 				msg += "" + adjacencyLists.get(i).getSecond().get(j).getFirst() + ","
-						+ adjacencyLists.get(i).getSecond().get(j).getSecond();
+						+ adjacencyLists.get(i).getSecond().get(j).getSecond()+" ";
 			}
 			msg += "\n";
 		}

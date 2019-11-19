@@ -1,5 +1,7 @@
 package myCollections ;
 
+import java.util.Comparator;
+
 /**
  * Class Pair
  * @author Mateo Loaiza
@@ -9,7 +11,7 @@ package myCollections ;
  *
  */
 
-public class Pair <F,S>{
+public class Pair <F extends Comparable<F>,S> implements Comparable<Pair<F,S>>{
 	
 	private F first;
 	private S second;
@@ -45,6 +47,17 @@ public class Pair <F,S>{
 	 */
 	public void setSecond(S s) {
 		second=s;
+	}
+
+	@Override
+	public int compareTo(Pair<F, S> p) {
+		if(first.compareTo(p.getFirst())>0) {
+			return 1;
+		}else if(first.compareTo(p.getFirst())<0) {
+			return -1;
+		}else {
+			return 0;
+		}
 	}
 
 }

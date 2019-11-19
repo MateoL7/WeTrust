@@ -57,18 +57,23 @@ public class Main extends Application{
 			e.printStackTrace();
 		}
 
-//		AdjacencyListGraph<Integer> g = new AdjacencyListGraph<Integer>(false);
-//		g.addVertex(1);
-//		g.addVertex(2);
-//		g.addVertex(3);
-//
-//		g.addEdge(1, 2, 5.0);
-//		//g.removeVertex(2);
-//		//g.removeEdge(1, 2);
-//
-//		System.out.println(g.toString());
-//		System.out.println();
-//		System.out.println();
+		AdjacencyListGraph<Integer> g = new AdjacencyListGraph<Integer>(false);
+		g.addVertex(1);
+		g.addVertex(2);
+		g.addVertex(3);
+		g.addVertex(4);
+		g.addVertex(5);
+		
+		g.addEdge(1, 3, 4.0);
+		g.addEdge(1, 5, 3.0);
+		g.addEdge(3, 5, 2.0);
+		g.addEdge(4, 3, 7.0);
+		g.addEdge(4, 5, 8.0);
+		g.addEdge(4, 2, 3.0);
+		g.addEdge(2, 5, 4.0);
+		System.out.println(g.toString());
+		System.out.println();
+		System.out.println();
 		launch(args);
 
 
