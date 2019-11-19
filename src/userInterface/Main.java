@@ -19,32 +19,32 @@ public class Main extends Application{
 
 	public static void main(String[] args){
 
-		try {
-
-			WeTrust w = new WeTrust();	
-
-
-
-			int num = 4;
-
-			w.chooseS(true,num);
-			w.loadEmployees();
-			w.generateEmployees(num);
-			w.generateEmployeesTrust();
-			w.loademployeesTrust();
-
-
-			w.recorrer(w.getemployeesTrust());
-		}catch(IOException e) {
-			System.out.println("Not found");
-		} catch (EmployeeAlreadyCreatedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-			catch (EmployeeNotRegisteredException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//
+//			WeTrust w = new WeTrust();	
+//
+//
+//
+//			int num = 4;
+//
+//			w.chooseS(true,num);
+//			w.loadEmployees();
+//			w.generateEmployees(num);
+//			w.generateEmployeesTrust();
+//			w.loademployeesTrust();
+//
+//
+//			w.recorrer(w.getemployeesTrust());
+//		}catch(IOException e) {
+//			System.out.println("Not found");
+//		} catch (EmployeeAlreadyCreatedException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//			catch (EmployeeNotRegisteredException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 //		AdjacencyListGraph<Integer> g = new AdjacencyListGraph<Integer>(false);
 //		g.addVertex(1);

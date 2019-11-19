@@ -33,7 +33,7 @@ public class WeTrust {
 	//	private AdjacencyListGraph<Employee> employeesTrustL; 
 	private ArrayList<Employee> employees;
 
-	public WeTrust() throws IOException, EmployeeAlreadyCreatedException {
+	public WeTrust() {
 		//		loadEmployees();
 	}
 
