@@ -184,4 +184,7 @@ public class WeTrust{
 	public double[][] FloydWarshall(){
 		return (((AdjacencyMatrixGraph<Employee>) employeesTrust).FloydWarshall(getemployeesTrust()));
 	}
+	public double[][] Kruskal(){
+		return (((AdjacencyMatrixGraph<Employee>) employeesTrust).Kruskal(getemployeesTrust(), Integer.MAX_VALUE));
+	}
 }

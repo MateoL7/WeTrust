@@ -27,7 +27,7 @@ public class Main extends Application{
 
 
 
-			int num = 5;
+			int num = 3;
 
 			w.chooseS(true,num);
 			w.loadEmployees();
@@ -44,8 +44,11 @@ public class Main extends Application{
 			System.out.println("-------------------------------------------------");
 			System.out.println("BFS");
 			ArrayList<Employee> BFS = w.getBFS(w.getEmployees().get(0));
+			System.out.println("-------------------------------------------------");
+			System.out.println("Kruskal");
+			w.showMatrix(w.Kruskal());
 			
-			System.out.println(Arrays.toString(BFS.toArray()));
+			System.out.println(Arrays.toString(BFS.toArray())+"\n");
 			
 			
 		}catch(IOException e) {
