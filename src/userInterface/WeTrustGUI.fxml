@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterface.GUIController">
    <children>
-      <Button fx:id="createBtt" layoutX="248.0" layoutY="34.0" mnemonicParsing="false" onAction="#generate" text="Create" />
-      <TextField fx:id="numOfEmp" layoutX="30.0" layoutY="34.0" prefHeight="25.0" prefWidth="181.0" promptText="Enter the number of employees" />
-      <Label fx:id="lbMatrix" layoutX="7.0" layoutY="115.0" prefHeight="245.0" prefWidth="587.0" />
-      <Button layoutX="247.0" layoutY="73.0" mnemonicParsing="false" onAction="#FloydWarshall" text="FloydWarshall" />
+      <Pane prefHeight="87.0" prefWidth="600.0">
+         <children>
+            <ImageView fitHeight="98.0" fitWidth="600.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Up-01.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutY="87.0" prefHeight="313.0" prefWidth="600.0">
+         <children>
+            <ImageView fitHeight="313.0" fitWidth="596.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Body-01.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="createBtt" layoutX="434.0" layoutY="58.0" mnemonicParsing="false" onAction="#generate" text="Create" />
+            <TextField fx:id="numOfEmp" layoutX="377.0" layoutY="59.0" prefHeight="18.0" prefWidth="50.0" />
+            <Button layoutX="215.0" layoutY="273.0" mnemonicParsing="false" onAction="#FloydWarshall" text="FloydWarshall" />
+         </children>
+      </Pane>
    </children>
 </Pane>
