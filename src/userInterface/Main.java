@@ -26,6 +26,7 @@ public class Main extends Application{
 
 	public static void main(String[] args) {
 		launch(args);
+	}
 	/*
      	AdjacencyListGraph<Integer> g = new AdjacencyListGraph<Integer>(false);
 		g.addVertex(1);

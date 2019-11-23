@@ -322,20 +322,41 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 		for (int i = 0; i < size; i++) {
 
 			Pair<V, List<Pair<V, Double>>> vPair = adjacencyLists.get(i);
-			int v = (int)vPair.getFirst();
+			int v = (int) vPair.getFirst();
 			List<Pair<V, Double>> vList = vPair.getSecond();
 
 			for (int j = 0; j < vList.size(); j++) {
-				int vA = (int)vList.get(j).getFirst(); 
+				int vA = (int) vList.get(j).getFirst();
 				double w = vList.get(j).getSecond();
-				
+
 				weightsMatrix[v][vA] = w;
 			}
 		}
 	}
-	
-	public double[][] getWeightsMatrix(){
+
+	public double[][] getWeightsMatrix() {
 		return weightsMatrix;
+	}
+
+	public double[][] floydWarshall(double[][] w) {
+
+		double dist[][] = w;
+		int V = dist.length;
+		int i, j, k;
+
+		for (k = 0; k < V; k++) {
+
+			for (i = 0; i < V; i++) {
+
+				for (j = 0; j < V; j++) {
+
+					if (dist[i][k] + dist[k][j] < dist[i][j])
+						dist[i][j] = dist[i][k] + dist[k][j];
+				}
+			}
+		}
+
+		return dist;
 	}
 
 	@Override
