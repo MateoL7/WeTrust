@@ -322,11 +322,11 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 		for (int i = 0; i < size; i++) {
 
 			Pair<V, List<Pair<V, Double>>> vPair = adjacencyLists.get(i);
-			int v = (int) vPair.getFirst();
+			int v = vertices.get(vPair.getFirst());
 			List<Pair<V, Double>> vList = vPair.getSecond();
 
 			for (int j = 0; j < vList.size(); j++) {
-				int vA = (int) vList.get(j).getFirst();
+				int vA = vertices.get(vList.get(j).getFirst());
 				double w = vList.get(j).getSecond();
 
 				weightsMatrix[v][vA] = w;
