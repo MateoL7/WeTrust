@@ -116,6 +116,8 @@ public class GUIController {
 				wt.loademployeesTrust();
 
 				lbMatrix.setText(wt.getEmployeesTrustL());
+				addGraphComponents(wt.getemployeesTrustL());
+				showGraph();
 			}
 
 			

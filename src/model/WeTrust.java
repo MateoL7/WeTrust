@@ -179,6 +179,10 @@ public class WeTrust{
 	public double[][] getemployeesTrust(){
 		return ((AdjacencyMatrixGraph<Employee>) employeesTrust).getMatrix();	
 	}
+	public double[][] getemployeesTrustL(){
+		((AdjacencyListGraph<Employee>)employeesTrust).makeWeightsMatrix();
+		return ((AdjacencyListGraph<Employee>)employeesTrust).getWeightsMatrix();
+	}
 	public String getEmployeesTrustL() {
 		return ((AdjacencyListGraph<Employee>) employeesTrust).toString();
 	}
