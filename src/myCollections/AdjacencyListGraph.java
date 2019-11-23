@@ -1,6 +1,7 @@
 package myCollections;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,8 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 	public AdjacencyListGraph() {
 		initialize();
 	}
+
+	private double[][] weightsMatrix;
 
 	/**
 	 * Constructor that gets the value for "isDirected" attribute. True if the graph
@@ -131,23 +134,22 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 	@Override
 	public void removeEdge(V u, V v) {
 		// TODO Auto-generated method stub
-		
+
 		int uValue = vertices.get(u);
 		int vValue = vertices.get(v);
-		
+
 		List<Pair<V, Double>> uList = adjacencyLists.get(uValue).getSecond();
-		
+
 		for (int i = 0; i < uList.size(); i++) {
-			if(uList.get(i).getFirst().equals(v)) {
+			if (uList.get(i).getFirst().equals(v)) {
 				uList.remove(i);
 			}
 		}
-		
-		
+
 		List<Pair<V, Double>> vList = adjacencyLists.get(vValue).getSecond();
-		
+
 		for (int i = 0; i < vList.size(); i++) {
-			if(vList.get(i).getFirst().equals(u)) {
+			if (vList.get(i).getFirst().equals(u)) {
 				vList.remove(i);
 			}
 		}
@@ -237,6 +239,105 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 		return null;
 	}
 
+	public double[][] Kruskal(double[][] weights, int inf) {
+		UnionFind<Integer> set = new UnionFind<>();
+
+		double[][] MST = new double[weights.length][weights.length];
+
+		for (int i = 0; i < weights.length; i++)
+			set.makeSet(i);
+		class obj {
+			int A;
+			int B;
+			double P;
+
+			obj(int a, int b, double weight) {
+				A = a;
+				B = b;
+				P = weight;
+			}
+
+			int getA() {
+				return A;
+			}
+
+			int getB() {
+				return B;
+			}
+
+			double getP() {
+				return P;
+			}
+		}
+		ArrayList<obj> aristas = new ArrayList<>();
+		for (int i = 0; i < weights.length; i++) {
+			for (int j = 0; j < weights.length; j++) {
+				double weight = weights[i][j];
+				if (weight > 0 && weight < inf) {
+					obj o = new obj(i, j, weight);
+					aristas.add(o);
+				}
+			}
+		}
+
+		Comparator<obj> comparator = new Comparator<obj>() {
+
+			public int compare(obj a, obj b) {
+				if (a.getP() > b.getP())
+					return 1;
+				else if (a.getP() < b.getP())
+					return -1;
+				else
+					return 0;
+			}
+		};
+
+		aristas.sort(comparator);
+		for (int i = 0; i < aristas.size(); i++) {
+			obj arista = aristas.get(i);
+			if (set.findSet(arista.getA()) != set.findSet(arista.getB())) {
+				set.union(arista.getA(), arista.getB());
+				MST[arista.getA()][arista.getB()] = arista.getP();
+				MST[arista.getB()][arista.getA()] = arista.getP();
+			}
+		}
+		System.out.println(set.size());
+		return MST;
+	}
+
+	public void makeWeightsMatrix() {
+
+		int size = adjacencyLists.size();
+		weightsMatrix = new double[size][size];
+
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				if (i != j)
+					weightsMatrix[i][j] = Integer.MAX_VALUE;
+				else
+					weightsMatrix[i][j] = 0.0;
+			}
+		}
+
+		for (int i = 0; i < size; i++) {
+
+			Pair<V, List<Pair<V, Double>>> vPair = adjacencyLists.get(i);
+			int v = (int)vPair.getFirst();
+			List<Pair<V, Double>> vList = vPair.getSecond();
+
+			for (int j = 0; j < vList.size(); j++) {
+				int vA = (int)vList.get(j).getFirst(); 
+				double w = vList.get(j).getSecond();
+				
+				weightsMatrix[v][vA] = w;
+			}
+		}
+	}
+	
+	public double[][] getWeightsMatrix(){
+		return weightsMatrix;
+	}
+
 	@Override
 	public String toString() {
 		String msg = "";
@@ -245,13 +346,11 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 			msg += " " + adjacencyLists.get(i).getFirst() + " : ";
 			for (int j = 0; j < adjacencyLists.get(i).getSecond().size(); j++) {
 				msg += "" + adjacencyLists.get(i).getSecond().get(j).getFirst() + ","
-						+ adjacencyLists.get(i).getSecond().get(j).getSecond()+" ";
+						+ adjacencyLists.get(i).getSecond().get(j).getSecond() + " ";
 			}
 			msg += "\n";
 		}
 		return msg;
 	}
 
-
 }
-
