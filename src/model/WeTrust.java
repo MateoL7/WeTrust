@@ -19,6 +19,9 @@ import myCollections.AdjacencyMatrixGraph;
 import myCollections.IGraph;
 import myExceptions.EmployeeAlreadyCreatedException;
 import myExceptions.EmployeeNotRegisteredException;
+import visuals.CellType;
+import visuals.Graph;
+import visuals.Model;
 
 /**
  * Class WeTrust
@@ -33,9 +36,9 @@ public class WeTrust{
 	private IGraph<Employee> employeesTrust; 
 	//	private AdjacencyListGraph<Employee> employeesTrustL; 
 	private ArrayList<Employee> employees;
+	
 
 	public WeTrust() {
-		//		loadEmployees();
 	}
 
 	public void loadEmployees() throws IOException, EmployeeAlreadyCreatedException {
@@ -117,8 +120,11 @@ public class WeTrust{
 			int x = Integer.parseInt(info[0]);
 			int y = Integer.parseInt(info[1]);
 			double trust = Math.round((Double.parseDouble((info[2]))));
+			
+			
 			Employee e1 = employees.get(x);
 			Employee e2 = employees.get(y);
+			
 
 			employeesTrust.addEdge(e1, e2, trust);
 
@@ -169,6 +175,7 @@ public class WeTrust{
 			return null;
 		}
 	}
+	
 	public double[][] getemployeesTrust(){
 		return ((AdjacencyMatrixGraph<Employee>) employeesTrust).getMatrix();	
 	}

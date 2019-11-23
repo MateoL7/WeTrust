@@ -4,16 +4,23 @@ import java.io.IOException;
 import java.util.Optional;
 
 import javafx.fxml.FXML;
-import javafx.scene.AmbientLight;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import model.WeTrust;
 import myExceptions.EmployeeAlreadyCreatedException;
 import myExceptions.EmployeeNotRegisteredException;
+import visuals.CellType;
+import visuals.Graph;
+import visuals.Layout;
+import visuals.Model;
+import visuals.RandomLayout;
 
 public class GUIController {
 
@@ -28,11 +35,13 @@ public class GUIController {
 
 	private boolean MorL;
 
+	private Graph graph;
 	private WeTrust wt;
 
 	@FXML
 	public void initialize() {
 		wt = new WeTrust();
+		graph = new Graph();
 		try {
 			wt.loadEmployees();
 		} catch (IOException e) {
@@ -57,11 +66,7 @@ public class GUIController {
 
 	public void generate() {
 		try {
-			
-			
-		
-			
-			
+
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Data Structure");
 			alert.setHeaderText("Choose the data structure you want");
@@ -71,6 +76,7 @@ public class GUIController {
 			ButtonType buttonTypeTwo = new ButtonType("List");
 			alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
 			Optional<ButtonType> resulType = alert.showAndWait();
+
 			if(resulType.get() == buttonTypeOne) {
 				MorL = true;
 				int num = Integer.parseInt(numOfEmp.getText());
@@ -78,7 +84,7 @@ public class GUIController {
 				wt.generateEmployees(num);
 				wt.generateEmployeesTrust();
 				wt.loademployeesTrust();
-				
+
 				double matrix[][] = wt.getemployeesTrust();
 				String mat = "";
 				for (int x=0; x < matrix.length; x++) {
@@ -96,8 +102,11 @@ public class GUIController {
 					mat += ("\n");
 				}
 				lbMatrix.setText(mat);
-				wt.showMatrix(wt.getemployeesTrust());
-				
+//				wt.showMatrix(wt.getemployeesTrust());
+				addGraphComponents(wt.getemployeesTrust());
+				showGraph();
+				createBtt.setVisible(false);
+
 			}else if(resulType.get() == buttonTypeTwo) {
 				MorL = false;
 				int num = Integer.parseInt(numOfEmp.getText());
@@ -105,11 +114,12 @@ public class GUIController {
 				wt.generateEmployees(num);
 				wt.generateEmployeesTrust();
 				wt.loademployeesTrust();
-				
+
 				lbMatrix.setText(wt.getEmployeesTrustL());
 			}
+
 			
-		
+
 
 		}catch(NumberFormatException e) {
 			Alert exception = new Alert(AlertType.ERROR);
@@ -122,5 +132,61 @@ public class GUIController {
 		} catch (EmployeeNotRegisteredException e) {
 		}
 	}
+	
+	public void FloydWarshall() {
+		double[][] done = wt.FloydWarshall();
+		graph.getPane().clear();
+		clean();
+		addGraphComponents(done);
+		
+		showGraph();
+	}
 
+	private void addGraphComponents(double[][] matrix) {
+
+		Model model = graph.getModel();
+
+		graph.beginUpdate();
+		
+		for(int i = 0; i < matrix.length; i++) {
+			model.addCell(String.valueOf(i), CellType.LABEL, i);
+		}
+
+		for(int i = 0; i < matrix.length; i++) {
+			for(int j = 0; j < matrix[0].length; j++) {
+				if(matrix[i][j] < Integer.MAX_VALUE) {
+					model.addEdge(String.valueOf(i), String.valueOf(j), matrix[i][j]);
+				}
+			}
+		}
+		graph.endUpdate();
+
+	}
+	
+	public void clean() {
+		Model model = graph.getModel();
+
+		graph.beginUpdate();
+		model.clear();
+		graph.endUpdate();
+	}
+	
+	public void showGraph() {
+		BorderPane root = new BorderPane();
+
+
+		root.setCenter(graph.getScrollPane());
+
+		Scene scene = new Scene(root, 1024, 768);
+
+		Stage primaryStage = new Stage();
+		primaryStage.setTitle("Representation");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+
+		
+
+		Layout layout = new RandomLayout(graph);
+		layout.execute();
+	}
 }

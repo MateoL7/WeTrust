@@ -9,6 +9,7 @@
    <children>
       <Button fx:id="createBtt" layoutX="248.0" layoutY="34.0" mnemonicParsing="false" onAction="#generate" text="Create" />
       <TextField fx:id="numOfEmp" layoutX="30.0" layoutY="34.0" prefHeight="25.0" prefWidth="181.0" promptText="Enter the number of employees" />
-      <Label fx:id="lbMatrix" layoutX="43.0" layoutY="116.0" prefHeight="235.0" prefWidth="493.0" />
+      <Label fx:id="lbMatrix" layoutX="7.0" layoutY="115.0" prefHeight="245.0" prefWidth="269.0" />
+      <Button layoutX="247.0" layoutY="73.0" mnemonicParsing="false" onAction="#FloydWarshall" text="FloydWarshall" />
    </children>
 </Pane>
