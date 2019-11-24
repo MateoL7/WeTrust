@@ -2,6 +2,7 @@ package myCollections;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NavigableSet;
 import java.util.Queue;
+import java.util.Stack;
 import java.util.TreeSet;
 
 import myExceptions.EmployeeAlreadyCreatedException;
@@ -173,17 +175,17 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 	public boolean areConnected(T u, T v) {
 		boolean exist = (u != null && v != null);
 		if(exist) {
-		int uValor = verticesIndices.get(u);
-		int vValor = verticesIndices.get(v);
+			int uValor = verticesIndices.get(u);
+			int vValor = verticesIndices.get(v);
 
-		return adjacencyMatrix[uValor][vValor] <= 800 && adjacencyMatrix[vValor][uValor] <= 800;
-		
+			return adjacencyMatrix[uValor][vValor] < 800 && adjacencyMatrix[vValor][uValor] < 800 && u != v;
+
 		}else {
 			return exist;
 		}
 
 	}
-	
+
 	public List<T> adjacents(T vertex){
 		List<T> adjacents = new ArrayList<T>();
 		for(Map.Entry<Integer, T> entry : vertices.entrySet()){
@@ -191,6 +193,7 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 				adjacents.add(entry.getValue());
 			}
 		}
+		Collections.sort(adjacents);
 		return adjacents;
 	}
 
@@ -203,22 +206,27 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 	public double[][] getMatrix() {
 		return adjacencyMatrix;
 	}
+	
+	public void setMatrix(double[][] matrix) {
+		adjacencyMatrix = matrix;
+	}
 
 	@Override
 	public T search(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+	@Override
 	public ArrayList<T> BFS(T vertex) {
 		ArrayList<T> result = new ArrayList<>();
 		Queue<T> options = new LinkedList<>();
-		
-		
-		
+
+
+
 		result.add(vertex);
 		options.add(vertex);
-		
+
 		while(!options.isEmpty()) {
 			T actual = options.poll();
 			if(!searchAux(result, actual)) {
@@ -233,8 +241,34 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 		}
 		return result;
 	}
+	@Override
+	public ArrayList<T> DFS(T vertex){
+		ArrayList<T> result = new ArrayList<>();
+		Stack<T> options = new Stack<>();
 	
-	public boolean searchAux(ArrayList<T> ar, T ver) {
+		
+		options.push(vertex);
+		
+		while(!options.empty()) {
+			ArrayList<T> visited = new ArrayList<>();
+			T actual = options.pop();
+			if(!searchAux(result, actual)) {
+				result.add(actual);
+			}
+			ArrayList<T> adj = (ArrayList<T>) adjacents(actual);
+			for(int i = 0; i < adj.size(); i++) {
+				T max = maxAux(adj, visited);
+				visited.add(max);
+				if(!searchAux(result, max)) {
+					options.push(max);	
+				}
+			}
+		}
+		
+		return result;
+	}
+
+	private boolean searchAux(ArrayList<T> ar, T ver) {
 		boolean found = false;
 		for(int i = 0; i < ar.size() && !found; i++) {
 			if(ver.equals(ar.get(i))) found = true;
@@ -242,44 +276,57 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 		return found;
 	}
 	
-	
+	private T maxAux(ArrayList<T> ar, ArrayList<T> vis) {
+		T max = ar.get(0);
+		for(int i =0; i < ar.size(); i++) {
+			if(ar.get(i).compareTo(max) > 0 && !searchAux(vis, ar.get(i))) {
+				max = ar.get(i);
+			}
+		}
+		return max;
+	}
+
+
+	@Override
 	public double[][] FloydWarshall(double[][] W) {
-		
+
 		int n = W.length;
 		double[][] D = W;
 		double v = 0;
-		
+
 		for(int k=0; k<n; k++) {
 			for(int i=0; i<n; i++) {
 				for(int j=0; j<n; j++) {
-					
+
 					if(j != k || i != k) {
-						
+
 						if(D[i][k] != Integer.MAX_VALUE && D[k][j] != Integer.MAX_VALUE) {
-							
+
 							v = D[i][k] + D[k][j];
-							
+
 							if(D[i][j] > v) D[i][j] = v;
-							
+
 						}
-						
+
 					}
-					
+
 				}
 			}
 		}
-		
+
 		return D;
-		
+
 	}
-	public double[][] Kruskal(double[][] weights, int inf){		
-	     UnionFind<Integer> set = new UnionFind<>();
-	     
+	@Override
+	public double[][] Kruskal(double[][] weights){
+		int inf = Integer.MAX_VALUE;
+		UnionFind<Integer> set = new UnionFind<>();
+
 		double[][] MST = new double[weights.length][weights.length];		
-		
+
 		for(int i = 0; i < weights.length; i++)
 			set.makeSet(i);		
-		   class obj {			
+		class obj {			
 			int A;
 			int B;
 			double P;			
@@ -298,7 +345,7 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 				return P;
 			}
 		}		
-		   ArrayList<obj> aristas = new ArrayList<>();		
+		ArrayList<obj> aristas = new ArrayList<>();		
 		for(int i = 0; i < weights.length;  i++) {
 			for(int j = 0; j < weights.length; j++) {
 				double weight = weights[i][j];
@@ -308,9 +355,9 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 				}
 			}
 		}	
-		
+
 		Comparator<obj> comparator = new Comparator<obj>() {			
-			
+
 			public int compare(obj a, obj b) {
 				if(a.getP() > b.getP())
 					return  1;
@@ -320,8 +367,8 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 					return 0;
 			}
 		};	
-		
-		
+
+
 		aristas.sort(comparator);		
 		for(int i = 0; i < aristas.size(); i++) {
 			obj arista = aristas.get(i);
@@ -331,11 +378,46 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 				MST[arista.getB()][arista.getA()] = arista.getP();
 			}
 		}
-		System.out.println(set.size());
+		//		System.out.println(set.size());
 		return MST;
 	}
-	
-	
-	
 
+	public int minVertex(int[] weight, boolean[] inMst, int vertices){
+		int minValue = Integer.MAX_VALUE;
+		int minVertex = -1;
+		for (int i = 0; i < vertices; i++) {
+			if(inMst[i] == false && weight[i] < minValue){
+				minValue = weight[i];
+				minVertex = i;
+			}
+		}
+		return minVertex;
+	}
+
+
+	@Override
+	public void prim(double[][] matrix){	
+		int[] mst = new int[matrix.length];	//lista de adyacencia
+		int[] weight = new int[matrix.length];	// pesos del mst
+		boolean[] inMst = new boolean[matrix.length];	// si ya estan conectados en el arbol		// inicio los pesos en valores maximos y conexiones en el arbol en false
+		for (int i = 0; i < matrix.length; i++) {
+			weight[i] = Integer.MAX_VALUE;
+			inMst[i] = false;
+		}		
+
+		// se hace prim desde el vertice 0
+		weight[0] = 0; 	// peso cero
+		mst[0] = -1;			
+
+		for (int i = 0; i < matrix.length-1; i++) {
+			int u = minVertex(weight, inMst, matrix.length);
+			inMst[u] = true;
+			for (int j = 0; j < matrix.length; j++) {
+				if(matrix[u][j] != 0 && inMst[j] == false && matrix[u][j] < weight[j]){
+					mst[j] = u;
+					weight[j] = (int) matrix[u][j];
+				}
+			}
+		}
+	}
 }

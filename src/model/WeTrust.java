@@ -176,6 +176,9 @@ public class WeTrust{
 		}
 	}
 	
+	public void setMatrix(double[][] m) {
+		((AdjacencyMatrixGraph<Employee>) employeesTrust).setMatrix(m);
+	}
 	public double[][] getemployeesTrust(){
 		return ((AdjacencyMatrixGraph<Employee>) employeesTrust).getMatrix();	
 	}
@@ -192,10 +195,18 @@ public class WeTrust{
 		return ((AdjacencyMatrixGraph<Employee>) employeesTrust).BFS(e);
 	}
 	
+	public ArrayList<Employee> getDFS(Employee e) {
+		return ((AdjacencyMatrixGraph<Employee>) employeesTrust).DFS(e);
+	}	
+	
 	public double[][] FloydWarshall(){
 		return (((AdjacencyMatrixGraph<Employee>) employeesTrust).FloydWarshall(getemployeesTrust()));
 	}
 	public double[][] Kruskal(){
-		return (((AdjacencyMatrixGraph<Employee>) employeesTrust).Kruskal(getemployeesTrust(), Integer.MAX_VALUE));
+		return (((AdjacencyMatrixGraph<Employee>) employeesTrust).Kruskal(getemployeesTrust()));
+	}
+
+	public ArrayList<Employee> adyacents(Employee employee) {
+		return (ArrayList<Employee>) ((AdjacencyMatrixGraph<Employee>) employeesTrust).adjacents(employee);
 	}
 }

@@ -11,7 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.WeTrust;
 import myExceptions.EmployeeAlreadyCreatedException;
@@ -101,8 +104,8 @@ public class GUIController {
 					}
 					mat += ("\n");
 				}
-				lbMatrix.setText(mat);
-//				wt.showMatrix(wt.getemployeesTrust());
+				//				lbMatrix.setText(mat);
+				//				wt.showMatrix(wt.getemployeesTrust());
 				addGraphComponents(wt.getemployeesTrust());
 				showGraph();
 				createBtt.setVisible(false);
@@ -120,7 +123,7 @@ public class GUIController {
 				showGraph();
 			}
 
-			
+
 
 
 		}catch(NumberFormatException e) {
@@ -134,13 +137,13 @@ public class GUIController {
 		} catch (EmployeeNotRegisteredException e) {
 		}
 	}
-	
+
 	public void FloydWarshall() {
 		double[][] done = wt.FloydWarshall();
 		graph.getPane().clear();
 		clean();
 		addGraphComponents(done);
-		
+
 		showGraph();
 	}
 
@@ -149,7 +152,7 @@ public class GUIController {
 		Model model = graph.getModel();
 
 		graph.beginUpdate();
-		
+
 		for(int i = 0; i < matrix.length; i++) {
 			model.addCell(String.valueOf(i), CellType.LABEL, i);
 		}
@@ -164,7 +167,7 @@ public class GUIController {
 		graph.endUpdate();
 
 	}
-	
+
 	public void clean() {
 		Model model = graph.getModel();
 
@@ -172,21 +175,23 @@ public class GUIController {
 		model.clear();
 		graph.endUpdate();
 	}
-	
+
 	public void showGraph() {
 		BorderPane root = new BorderPane();
 
-
+		
 		root.setCenter(graph.getScrollPane());
 
 		Scene scene = new Scene(root, 1024, 768);
 
 		Stage primaryStage = new Stage();
 		primaryStage.setTitle("Representation");
+		scene.setFill(Color.BLACK);
+		primaryStage.setFullScreen(true);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
-		
+
 
 		Layout layout = new RandomLayout(graph);
 		layout.execute();

@@ -1,5 +1,7 @@
 package myCollections;
 
+import java.util.ArrayList;
+
 import myExceptions.EmployeeAlreadyCreatedException;
 import myExceptions.EmployeeNotRegisteredException;
 
@@ -60,6 +62,16 @@ public interface IGraph<T extends Comparable<T>> {
 	 * @return The vertex matching the id
 	 */
 	public T search(int id);
+
+	public ArrayList<T> BFS(T vertex);
+
+	public double[][] FloydWarshall(double[][] W);
+
+	public double[][] Kruskal(double[][] weights);
+
+	public void prim(double[][] matrix);
+
+	public ArrayList<T> DFS(T vertex);
 
 	
 }

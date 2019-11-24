@@ -10,28 +10,30 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.stage.Stage;
+import model.Employee;
+import model.WeTrust;
 import myCollections.AdjacencyListGraph;
+import myCollections.AdjacencyMatrixGraph;
+import myExceptions.EmployeeAlreadyCreatedException;
+import myExceptions.EmployeeNotRegisteredException;
 
 
-public class Main extends Application{
+//public class Main extends Application{
+public class Main{
 
-	@Override
-	public void start(Stage stage) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("WeTrustGUI.fxml")); 
-		Scene scene = new Scene(root, 1024, 768);
-		stage.setScene(scene);
-		stage.setTitle("WeTrust");
-		stage.show();
-	}
+	//	@Override
+	//	public void start(Stage stage) throws IOException {
+	//		Parent root = FXMLLoader.load(getClass().getResource("WeTrustGUI.fxml")); 
+	//		Scene scene = new Scene(root);
+	//		stage.setScene(scene);
+	//		stage.setTitle("WeTrust");
+	//		stage.show();
+	//	}
 
-	public static void main(String[] args) {
-		launch(args);
-//<<<<<<< Updated upstream
-	}
+	//	public static void main(String[] args) {
+	//		launch(args);
+	//	}
 	/*
-=======
-		/*
->>>>>>> Stashed changes
      	AdjacencyListGraph<Integer> g = new AdjacencyListGraph<Integer>(false);
 		g.addVertex(1);
 	    g.addVertex(2);
@@ -64,48 +66,65 @@ public class Main extends Application{
 
 	}
 
-		 */
-		//public static void main(String[] args){
+	 */
+	public static void main(String[] args){
 
-		//		try {
-		//
-		//			WeTrust w = new WeTrust();	
-		//
-		//
-		//
-		//			int num = 3;
-		//
-		//			w.chooseS(true,num);
-		//			w.loadEmployees();
-		//			w.generateEmployees(num);
-		//			w.generateEmployeesTrust();
-		//			w.loademployeesTrust();
-		//
-		//
-		//			System.out.println("Graph");
-		//			w.showMatrix(w.getemployeesTrust());
-		//			System.out.println("-------------------------------------------------");
-		//			System.out.println("Floyd-Warshall");
-		//			w.showMatrix(w.FloydWarshall());
-		//			System.out.println("-------------------------------------------------");
-		//			System.out.println("BFS");
-		//			ArrayList<Employee> BFS = w.getBFS(w.getEmployees().get(0));
-		//			System.out.println("-------------------------------------------------");
-		//			System.out.println("Kruskal");
-		//			w.showMatrix(w.Kruskal());
-		//			
-		//			System.out.println(Arrays.toString(BFS.toArray())+"\n");
-		//			
-		//			
-		//		}catch(IOException e) {
-		//			System.out.println("Not found");
-		//		} catch (EmployeeAlreadyCreatedException e1) {
-		//			e1.printStackTrace();
-		//		}
-		//			catch (EmployeeNotRegisteredException e) {
-		//			e.printStackTrace();
-		//		}
-		//
+		try {
+
+			WeTrust w = new WeTrust();	
+
+
+
+			int num = 5;
+
+			w.chooseS(true,num);
+			w.loadEmployees();
+			w.generateEmployees(num);
+			w.generateEmployeesTrust();
+			w.loademployeesTrust();
+
+			double[][] test = 
+						{{0.0,1.0,900.0,1.0,1.0},
+						{1.0,0.0,1.0,900.0,1.0},
+						{900.0,1.0,900.0,900.0,900.0},
+						{1.0,900.0,900.0,0.0,1.0},
+						{1.0,1.0,900.0,1.0,0.0}};
+
+			w.setMatrix(test);
+			
+			System.out.println(Arrays.toString((w.adyacents(w.getEmployees().get(0)).toArray())));
+			
+			System.out.println("Graph");
+			w.showMatrix(w.getemployeesTrust());
+			System.out.println("-------------------------------------------------");
+			System.out.println("BFS");
+			ArrayList<Employee> BFS = w.getBFS(w.getEmployees().get(0));
+			System.out.println(Arrays.toString(BFS.toArray()));
+			System.out.println("-------------------------------------------------");
+			System.out.println("DFS");
+			ArrayList<Employee> DFS = w.getDFS(w.getEmployees().get(0));
+			System.out.println(Arrays.toString(DFS.toArray()));	
+			System.out.println("-------------------------------------------------");
+			System.out.println("Floyd-Warshall");
+			w.showMatrix(w.FloydWarshall());
+			System.out.println("-------------------------------------------------");
+			System.out.println("Kruskal");
+			w.showMatrix(w.Kruskal());
+
+
+
+//			System.out.println(Arrays.toString(BFS.toArray())+"\n");
+
+
+		}catch(IOException e) {
+			System.out.println("Not found");
+		} catch (EmployeeAlreadyCreatedException e1) {
+			e1.printStackTrace();
+		}
+		catch (EmployeeNotRegisteredException e) {
+			e.printStackTrace();
+		}
+
 		//		AdjacencyListGraph<Integer> g = new AdjacencyListGraph<Integer>(false);
 		//		g.addVertex(1);
 		//		g.addVertex(2);
@@ -126,8 +145,8 @@ public class Main extends Application{
 		//	launch(args);
 		//
 		//
-		//}
 	}
+}
 
 
 
