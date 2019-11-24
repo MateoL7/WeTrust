@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterface.GUIController">
    <children>
@@ -19,14 +21,27 @@
       </Pane>
       <Pane layoutY="87.0" prefHeight="313.0" prefWidth="600.0">
          <children>
-            <ImageView fitHeight="313.0" fitWidth="596.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="FirstScreen" fitHeight="313.0" fitWidth="596.0" layoutX="2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/Body-01.jpg" />
                </image>
             </ImageView>
             <Button fx:id="createBtt" layoutX="434.0" layoutY="58.0" mnemonicParsing="false" onAction="#generate" text="Create" />
             <TextField fx:id="numOfEmp" layoutX="377.0" layoutY="59.0" prefHeight="18.0" prefWidth="50.0" />
-            <Button layoutX="215.0" layoutY="273.0" mnemonicParsing="false" onAction="#FloydWarshall" text="FloydWarshall" />
+            <Button fx:id="showBtt" layoutX="215.0" layoutY="273.0" mnemonicParsing="false" onAction="#showGraph" text="Show Company's Graph" />
+            <Label fx:id="optionsLabel" layoutX="30.0" layoutY="14.0" prefHeight="47.0" prefWidth="199.0" text="OPTIONS">
+               <font>
+                  <Font name="Arial Black" size="32.0" />
+               </font>
+            </Label>
+            <Button fx:id="employeesListBtt" layoutX="30.0" layoutY="83.0" mnemonicParsing="false" text="Employees List" />
+            <Button fx:id="bestEmployeeBtt" layoutX="253.0" layoutY="136.0" mnemonicParsing="false" onAction="#getBestOption" text="Best Employee" />
+            <TextField fx:id="employeeIdDes" layoutX="30.0" layoutY="136.0" prefHeight="25.0" prefWidth="214.0" promptText="Destination Employee's Id" />
+            <Label fx:id="bestLabl" layoutX="30.0" layoutY="174.0" prefHeight="25.0" prefWidth="317.0">
+               <font>
+                  <Font name="Comic Sans MS" size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

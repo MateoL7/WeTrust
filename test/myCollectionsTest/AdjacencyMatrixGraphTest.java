@@ -119,6 +119,5 @@ class AdjacencyMatrixGraphTest {
 			assertTrue("Not the same result",result.get(i).getId() == DFSExpected.get(i).getId());
 		}
 	}
-	
 
 }

@@ -209,4 +209,26 @@ public class WeTrust{
 	public ArrayList<Employee> adyacents(Employee employee) {
 		return (ArrayList<Employee>) ((AdjacencyMatrixGraph<Employee>) employeesTrust).adjacents(employee);
 	}
+	
+	public Employee getBestOption(Employee des) {
+		Employee best = null;
+		double[][] matrix;
+		int desId = des.getId();
+		if(((AdjacencyMatrixGraph<Employee>) employeesTrust)!= null) {
+			matrix = FloydWarshall();
+		}else{
+			matrix = ((AdjacencyListGraph<Employee>) employeesTrust).FloydWarshall(getemployeesTrustL());
+		}
+		double min = Integer.MAX_VALUE;
+		int minId = Integer.MAX_VALUE;
+
+		for(int i = 0; i < matrix[desId].length;i++) {
+			if(min > matrix[desId][i] && i != desId) {
+				min = matrix[desId][i];
+				minId = i;
+			}
+		}
+		best = searchEmployee(minId);
+		return best;
+	}
 }

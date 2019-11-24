@@ -337,8 +337,9 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 	public double[][] getWeightsMatrix() {
 		return weightsMatrix;
 	}
-
-	public double[][] floydWarshall(double[][] w) {
+	
+	@Override
+	public double[][] FloydWarshall(double[][] w) {
 
 		double dist[][] = w;
 		int V = dist.length;
@@ -372,6 +373,30 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 			msg += "\n";
 		}
 		return msg;
+	}
+
+	@Override
+	public ArrayList<V> BFS(V vertex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public double[][] Kruskal(double[][] weights) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void prim(double[][] matrix) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ArrayList<V> DFS(V vertex) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
