@@ -1,5 +1,4 @@
-package myCollectionsTest;
-
+package model;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -9,16 +8,15 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+
 import model.Employee;
 import model.WeTrust;
-import myCollections.AdjacencyMatrixGraph;
 import myExceptions.EmployeeAlreadyCreatedException;
 import myExceptions.EmployeeNotRegisteredException;
 
-public class AdjacencyMatrixGraphTest {
+public class WeTrustTest {
 
 	//Attributes
-	private AdjacencyMatrixGraph<Employee> adjMatrix;
 	private WeTrust w;
 
 
@@ -34,7 +32,6 @@ public class AdjacencyMatrixGraphTest {
 	//Scenarios
 	public void scenary1() {
 		w = new WeTrust();
-		adjMatrix = new AdjacencyMatrixGraph<Employee>();
 	}
 
 	public void scenary2() {
@@ -156,10 +153,9 @@ public class AdjacencyMatrixGraphTest {
 	//Tests
 	
 	@Test
-	public void testAdjacencyMatrixGraph() {
+	public void testWeTrust() {
 		scenary1();
-		scenary2();
-		assertNotNull("The object is not created", adjMatrix);
+		assertNotNull("The object is not created", w);
 	}
 	@Test
 	public void testBFS() {
@@ -204,6 +200,17 @@ public class AdjacencyMatrixGraphTest {
 				assertTrue("Not the right value", result[i][j] == kruskalExpected[i][j]);
 			}
 		}
+	}
+	@Test 
+	public void testBestOption() {
+		scenary1();
+		scenary2();
+		scenary5();
+		Employee bestExpected = new Employee(1, "Kirbee", "Reeman");
+		Employee result = w.getBestOption(w.getEmployees().get(0));
+		assertTrue("Not the right value", result.getId() == bestExpected.getId());
+		assertTrue("Not the right value", result.getName().equalsIgnoreCase(bestExpected.getName()));
+		assertTrue("Not the right value", result.getLastName().equalsIgnoreCase(bestExpected.getLastName()));
 	}
 
 }

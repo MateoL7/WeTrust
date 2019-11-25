@@ -305,6 +305,7 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 							v = D[i][k] + D[k][j];
 
 							if(D[i][j] > v) D[i][j] = v;
+							if(i == j) D[i][j] = 0.0;
 
 						}
 

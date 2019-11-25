@@ -139,8 +139,6 @@ public class WeTrust{
 			for (int y=0; y < m[x].length; y++) {
 				if(m[x][y] == Integer.MAX_VALUE) {
 					System.out.print("$");
-				}else if(x == y){
-					System.out.print (0.0);	
 				}
 				else {
 					System.out.print(m[x][y]);
@@ -193,6 +191,10 @@ public class WeTrust{
 
 	public ArrayList<Employee> getBFS(Employee e) {
 		return ((AdjacencyMatrixGraph<Employee>) employeesTrust).BFS(e);
+	}
+	
+	public AdjacencyMatrixGraph<Employee> getGraphMatrix(){
+		return (AdjacencyMatrixGraph<Employee>) employeesTrust;
 	}
 	
 	public ArrayList<Employee> getDFS(Employee e) {
