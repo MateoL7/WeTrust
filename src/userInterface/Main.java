@@ -38,43 +38,6 @@ public class Main extends Application{
 			lc.setScene(scene);
 		}
 
-//		public static void main(String[] args) {
-//			launch(args);
-//		}
-	/*
-     	AdjacencyListGraph<Integer> g = new AdjacencyListGraph<Integer>(false);
-		g.addVertex(1);
-	    g.addVertex(2);
-	    g.addVertex(3);
-	    g.addVertex(4);
-	    g.addVertex(5);
-	//		
-	    g.addEdge(1, 2, 17.0);
-	    g.addEdge(3, 4, 23.0);
-
-	    System.out.println(g.toString());
-
-	    g.makeWeightsMatrix();
-	    double[][] w = g.getWeightsMatrix();
-	    double[][] ww = g.Kruskal(w, Integer.MAX_VALUE);
-
-	    for (int i = 0; i < w.length; i++) {
-			for (int j = 0; j < w.length; j++) {
-				System.out.print(""+w[i][j]+"   ");
-			}
-			System.out.println();
-		}
-
-	    for (int i = 0; i < w.length; i++) {
-			for (int j = 0; j < w.length; j++) {
-				System.out.print(""+ww[i][j]+"   ");
-			}
-			System.out.println();
-		}
-
-	}
-
-	 */
 	public static void main(String[] args){
 		try {
 

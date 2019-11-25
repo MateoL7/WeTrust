@@ -42,7 +42,7 @@
                   <Font name="Comic Sans MS" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="comBtt" layoutX="14.0" layoutY="273.0" mnemonicParsing="false" text="Show Best Communication Paths" />
+            <Button fx:id="comBtt" layoutX="14.0" layoutY="273.0" mnemonicParsing="false" onAction="#getBestEmployeeCom" text="Show Best Communication Paths" />
             <TextField fx:id="employeeIdDes1" layoutX="23.0" layoutY="199.0" prefHeight="25.0" prefWidth="214.0" promptText="Destination Employee's Id" />
             <Button fx:id="worstEmployeeBtt" layoutX="249.0" layoutY="199.0" mnemonicParsing="false" onAction="#getWorstOption" text="Worst Employee" />
             <Label fx:id="worstLab" layoutX="23.0" layoutY="231.0" prefHeight="25.0" prefWidth="317.0">

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Optional;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -225,9 +227,21 @@ public class GUIController {
 		}
 	}
 
-	public void getBestEmployeeCom() {
+	public void getBestEmployeeCom() throws IOException {
 		try {
 			String best = wt.getBestCommunication();
+			System.out.println(best);
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CommunicationPath.fxml"));
+			Parent root = fxmlLoader.load();
+			Scene scene = new Scene(root);
+			CommunicationGUI cg = fxmlLoader.getController();
+			cg.setScene(scene);
+			cg.setTextCom(best);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle("Trust - Communication");
+			stage.show();
+			
 		}catch(NumberFormatException n) {
 			Alert exception = new Alert(AlertType.ERROR);
 			exception.setHeaderText("Error");
@@ -268,7 +282,7 @@ public class GUIController {
 	}
 
 	public void getEmployeesList() {
-
+		
 	}
 
 	public void clean() {

@@ -223,5 +223,17 @@ public class WeTrustTest {
 		assertTrue("Not the right value", result.getName().equalsIgnoreCase(worstExpected.getName()));
 		assertTrue("Not the right value", result.getLastName().equalsIgnoreCase(worstExpected.getLastName()));
 	}
+	@Test
+	public void testGetBestCommunication() {
+		scenary1();
+		scenary2();
+		scenary5();
+		String msgExpected = "\n1) Id: 0 Name: Juan Reyes --------- Id: 1 Name: Kirbee Reeman\n"+
+				"2) Id: 1 Name: Kirbee Reeman --------- Id: 2 Name: Brandi Lepard\n" + 
+				"3) Id: 1 Name: Kirbee Reeman --------- Id: 4 Name: Pennie Sandeson\n" + 
+				"4) Id: 3 Name: Brynna Edwinson --------- Id: 4 Name: Pennie Sandeson";
+		String result = w.getBestCommunication();
+		assertTrue("Not the right message", result.equalsIgnoreCase(msgExpected));
+	}
 
 }
