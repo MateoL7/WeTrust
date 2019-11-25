@@ -212,5 +212,16 @@ public class WeTrustTest {
 		assertTrue("Not the right value", result.getName().equalsIgnoreCase(bestExpected.getName()));
 		assertTrue("Not the right value", result.getLastName().equalsIgnoreCase(bestExpected.getLastName()));
 	}
+	@Test 
+	public void testWorstOption() {
+		scenary1();
+		scenary2();
+		scenary5();
+		Employee worstExpected = new Employee(3, "Brynna", "Edwinson");
+		Employee result = w.getWorstOption(w.getEmployees().get(0));
+		assertTrue("Not the right value", result.getId() == worstExpected.getId());
+		assertTrue("Not the right value", result.getName().equalsIgnoreCase(worstExpected.getName()));
+		assertTrue("Not the right value", result.getLastName().equalsIgnoreCase(worstExpected.getLastName()));
+	}
 
 }

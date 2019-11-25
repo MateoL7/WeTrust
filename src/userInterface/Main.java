@@ -76,63 +76,66 @@ public class Main extends Application{
 
 	 */
 	public static void main(String[] args){
-//		try {
-//
-//			
-//
-//
-//
-//			int num = 5;
-//			WeTrust w = new WeTrust(true, num);	
-//
-//			w.loadEmployees();
-//			w.generateEmployees(num);
-//			w.generateEmployeesTrust();
-//			w.loademployeesTrust();
-//
-//			double[][] test = 
-//						{{0.0,100.0,900.0,110.0,120.0},
-//						{100.0,0.0,1.0,900.0,1.0},
-//						{900.0,1.0,900.0,900.0,900.0},
-//						{110.0,900.0,900.0,0.0,1.0},
-//						{120.0,1.0,900.0,1.0,0.0}};
-//
-//			w.setMatrix(test);
-//			
-//			System.out.println(Arrays.toString((w.adyacents(w.getEmployees().get(0)).toArray())));
-//			
-//			System.out.println("Graph");
-//			w.showMatrix(w.getemployeesTrust());
-//			System.out.println("-------------------------------------------------");
-//			System.out.println("BFS");
-//			ArrayList<Employee> BFS = w.getBFS(w.getEmployees().get(0));
-//			System.out.println(Arrays.toString(BFS.toArray()));
-//			System.out.println("-------------------------------------------------");
-//			System.out.println("DFS");
-//			ArrayList<Employee> DFS = w.getDFS(w.getEmployees().get(0));
-//			System.out.println(Arrays.toString(DFS.toArray()));	
-//			System.out.println("-------------------------------------------------");
-//			System.out.println("Floyd-Warshall");
-//			w.showMatrix(w.FloydWarshall());
-//			System.out.println("-------------------------------------------------");
-//			System.out.println("Best option for " + w.getEmployees().get(0));
-//			System.out.println(w.getBestOption(w.getEmployees().get(0)));
-//			
-//			System.out.println("-------------------------------------------------");
-//			System.out.println("Best employees com");
-//			System.out.println(w.getBestCommunication());
-//			System.out.println("-------------------------------------------------");
-//			System.out.println("Kruskal");
-//			w.showMatrix(w.Kruskal());
-//
-//		}catch(IOException e) {
-//			System.out.println("Not found");
-//		} catch (EmployeeAlreadyCreatedException e1) {
-//			e1.printStackTrace();
-//		}
-//		catch (EmployeeNotRegisteredException e) {
-//			e.printStackTrace();
-//		}
+		try {
+
+			
+
+
+
+			int num = 5;
+			WeTrust w = new WeTrust(true, num);	
+
+			w.loadEmployees(); 
+			w.generateEmployees(num);
+			w.generateEmployeesTrust();
+			w.loademployeesTrust();
+
+			double[][] test = 
+						{{0.0,100.0,900.0,110.0,120.0},
+						{100.0,0.0,1.0,900.0,1.0},
+						{900.0,1.0,900.0,900.0,900.0},
+						{110.0,900.0,900.0,0.0,1.0},
+						{120.0,1.0,900.0,1.0,0.0}};
+
+			w.setMatrix(test);
+			
+			System.out.println(Arrays.toString((w.adyacents(w.getEmployees().get(0)).toArray())));
+			
+			System.out.println("Graph");
+			w.showMatrix(w.getemployeesTrust());
+			System.out.println("-------------------------------------------------");
+			System.out.println("BFS");
+			ArrayList<Employee> BFS = w.getBFS(w.getEmployees().get(0));
+			System.out.println(Arrays.toString(BFS.toArray()));
+			System.out.println("-------------------------------------------------");
+			System.out.println("DFS");
+			ArrayList<Employee> DFS = w.getDFS(w.getEmployees().get(0));
+			System.out.println(Arrays.toString(DFS.toArray()));	
+			System.out.println("-------------------------------------------------");
+			System.out.println("Floyd-Warshall");
+			w.showMatrix(w.FloydWarshall());
+			System.out.println("-------------------------------------------------");
+			System.out.println("Best option for " + w.getEmployees().get(0));
+			System.out.println(w.getBestOption(w.getEmployees().get(0)));
+			System.out.println("-------------------------------------------------");
+			System.out.println("Worst option for " + w.getEmployees().get(0));
+			System.out.println(w.getWorstOption(w.getEmployees().get(0)));
+			
+			System.out.println("-------------------------------------------------");
+			System.out.println("Best employees com");
+			System.out.println(w.getBestCommunication());
+			System.out.println("-------------------------------------------------");
+			System.out.println("Kruskal");
+			w.showMatrix(w.Kruskal());
+
+		}catch(IOException e) {
+			System.out.println("Not found");
+		} catch (EmployeeAlreadyCreatedException e1) {
+			e1.printStackTrace();
+		}
+		catch (EmployeeNotRegisteredException e) {
+			e.printStackTrace();
+		}
 //
 //				AdjacencyListGraph<Integer> g = new AdjacencyListGraph<Integer>(false);
 //				g.addVertex(1);
