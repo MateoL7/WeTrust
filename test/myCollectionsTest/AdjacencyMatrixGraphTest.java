@@ -33,7 +33,7 @@ public class AdjacencyMatrixGraphTest {
 
 	//Scenarios
 	public void scenary1() {
-		w = new WeTrust();
+		w = new WeTrust(true, 3);
 		adjMatrix = new AdjacencyMatrixGraph<Employee>();
 	}
 

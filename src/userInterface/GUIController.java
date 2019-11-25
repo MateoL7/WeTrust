@@ -29,33 +29,44 @@ import visuals.RandomLayout;
 
 public class GUIController {
 
-	@FXML
-	private ImageView FirstScreen;
+    @FXML
+    private ImageView FirstScreen;
 
-	@FXML
-	private Button createBtt;
+    @FXML
+    private Button createBtt;
 
+    @FXML
+    private TextField numOfEmp;
 
-	@FXML
-	private Label bestLabl;
+    @FXML
+    private Button showBtt;
 
-	@FXML
-	private TextField numOfEmp;
+    @FXML
+    private Label optionsLabel;
 
-	@FXML
-	private Button showBtt;
+    @FXML
+    private Label worstLab;
+    
+    @FXML
+    private Button employeesListBtt;
 
-	@FXML
-	private Label optionsLabel;
+    @FXML
+    private Button bestEmployeeBtt;
 
-	@FXML
-	private Button employeesListBtt;
+    @FXML
+    private TextField employeeIdDes;
 
-	@FXML
-	private Button bestEmployeeBtt;
+    @FXML
+    private Label bestLabl;
 
-	@FXML
-	private TextField employeeIdDes;
+    @FXML
+    private Button comBtt;
+
+    @FXML
+    private TextField employeeIdDes1;
+
+    @FXML
+    private Button worstEmployeeBtt;
 
 	private boolean MorL;
 
@@ -64,7 +75,6 @@ public class GUIController {
 
 	@FXML
 	public void initialize() {
-		wt = new WeTrust();
 		graph = new Graph();
 		showBtt.setVisible(false);
 		employeeIdDes.setVisible(false);
@@ -72,167 +82,219 @@ public class GUIController {
 		optionsLabel.setVisible(false);
 		employeesListBtt.setVisible(false);
 		bestLabl.setVisible(false);
-		try {
-			wt.loadEmployees();
-		} catch (IOException e) {
-		} catch (EmployeeAlreadyCreatedException e) {
-		}
+		worstEmployeeBtt.setVisible(false);
+		employeeIdDes1.setVisible(false);
+		comBtt.setVisible(false);
+		worstLab.setVisible(false);
 	}
 
 	/**
 	 * @return the morL
 	 */
-	 public boolean isMorL() {
-		 return MorL;
-	 }
+	public boolean isMorL() {
+		return MorL;
+	}
 
-	 /**
-	  * @param morL the morL to set
-	  */
-	 public void setMorL(boolean morL) {
-		 MorL = morL;
-	 }
-
-
-	 public void generate() {
-		 try {
-
-			 Alert alert = new Alert(AlertType.CONFIRMATION);
-			 alert.setTitle("Data Structure");
-			 alert.setHeaderText("Choose the data structure you want");
-			 alert.setContentText("Data structures available");
-
-			 ButtonType buttonTypeOne = new ButtonType("Matrix");
-			 ButtonType buttonTypeTwo = new ButtonType("List");
-			 alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
-			 Optional<ButtonType> resulType = alert.showAndWait();
-
-			 if(resulType.get() == buttonTypeOne) {
-				 MorL = true;
-				 int num = Integer.parseInt(numOfEmp.getText());
-				 wt.chooseS(MorL, num);
-				 wt.generateEmployees(num);
-				 wt.generateEmployeesTrust();
-				 wt.loademployeesTrust();
-
-				 addGraphComponents(wt.getemployeesTrust());
-				 createBtt.setVisible(false);
-				 numOfEmp.setVisible(false);
-
-			 }else if(resulType.get() == buttonTypeTwo) {
-				 MorL = false;
-				 int num = Integer.parseInt(numOfEmp.getText());
-				 wt.chooseS(MorL, num);
-				 wt.generateEmployees(num);
-				 wt.generateEmployeesTrust();
-				 wt.loademployeesTrust();
-
-				 addGraphComponents(wt.getemployeesTrustL());
-				 createBtt.setVisible(false);
-				 numOfEmp.setVisible(false);
-			 }
-
-			 showBtt.setVisible(true);
-			 FirstScreen.setVisible(false);
-			 employeeIdDes.setVisible(true);
-			 bestEmployeeBtt.setVisible(true);
-			 optionsLabel.setVisible(true);
-			 employeesListBtt.setVisible(true);
+	/**
+	 * @param morL the morL to set
+	 */
+	public void setMorL(boolean morL) {
+		MorL = morL;
+	}
 
 
-		 }catch(NumberFormatException e) {
-			 Alert exception = new Alert(AlertType.ERROR);
-			 exception.setHeaderText("Error");
-			 exception.setTitle("ERROR");
-			 exception.setContentText("Please provide the information required");
-			 exception.showAndWait();
-		 } catch (IOException e) {
-		 } catch (EmployeeAlreadyCreatedException e) {
-		 } catch (EmployeeNotRegisteredException e) {
-		 }
-	 }
+	public void generate() {
+		try {
 
-	 public void FloydWarshall() {
-		 double[][] done = wt.FloydWarshall();
-		 graph.getPane().clear();
-		 clean();
-		 addGraphComponents(done);
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Data Structure");
+			alert.setHeaderText("Choose the data structure you want");
+			alert.setContentText("Data structures available");
 
-		 showGraph();
-	 }
+			ButtonType buttonTypeOne = new ButtonType("Matrix");
+			ButtonType buttonTypeTwo = new ButtonType("List");
+			alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
+			Optional<ButtonType> resulType = alert.showAndWait();
 
-	 private void addGraphComponents(double[][] matrix) {
+			if(resulType.get() == buttonTypeOne) {
+				MorL = true;
+				int num = Integer.parseInt(numOfEmp.getText());
+				wt = new WeTrust(MorL, num);
+				wt.loadEmployees();
+				wt.generateEmployees(num);
+				wt.generateEmployeesTrust();
+				wt.loademployeesTrust();
 
-		 Model model = graph.getModel();
+				addGraphComponents(wt.getemployeesTrust());
+				createBtt.setVisible(false);
+				numOfEmp.setVisible(false);
+				try {
+					wt.loadEmployees();
+				} catch (IOException e) {
+				} catch (EmployeeAlreadyCreatedException e) {
+				}
 
-		 graph.beginUpdate();
+			}else if(resulType.get() == buttonTypeTwo) {
+				MorL = false;
+				int num = Integer.parseInt(numOfEmp.getText());
+				wt = new WeTrust(MorL, num);
+				wt.loadEmployees();
+				wt.generateEmployees(num);
+				wt.generateEmployeesTrust();
+				wt.loademployeesTrust();
 
-		 for(int i = 0; i < matrix.length; i++) {
-			 model.addCell(String.valueOf(i), CellType.LABEL, i);
-		 }
+				addGraphComponents(wt.getemployeesTrust());
+				createBtt.setVisible(false);
+				numOfEmp.setVisible(false);
+			}
 
-		 for(int i = 0; i < matrix.length; i++) {
-			 for(int j = 0; j < matrix[0].length; j++) {
-				 if(matrix[i][j] < Integer.MAX_VALUE) {
-					 model.addEdge(String.valueOf(i), String.valueOf(j), matrix[i][j]);
-				 }
-			 }
-		 }
-		 graph.endUpdate();
-
-	 }
-
-	 public void getBestOption() {
-		 try {
-		 String id = employeeIdDes.getText();
-		 Employee des = wt.searchEmployee(Integer.parseInt(id));
-		 Employee best = wt.getBestOption(des);
-		 bestLabl.setText(best.toString());
-		 bestLabl.setVisible(true);
-
-		 }catch(NumberFormatException n) {
-			 Alert exception = new Alert(AlertType.ERROR);
-			 exception.setHeaderText("Error");
-			 exception.setTitle("ERROR");
-			 exception.setContentText("Please provide the information required");
-			 exception.showAndWait();
-		 }catch(ArrayIndexOutOfBoundsException e) {
-			 Alert exception = new Alert(AlertType.ERROR);
-			 exception.setHeaderText("Error");
-			 exception.setTitle("ERROR");
-			 exception.setContentText("There is no Employee with that id");
-			 exception.showAndWait();
-		 }
-	 }
-	 
-	 public void getEmployeesList() {
-		 
-	 }
-
-	 public void clean() {
-		 Model model = graph.getModel();
-
-		 graph.beginUpdate();
-		 model.clear();
-		 graph.endUpdate();
-	 }
-
-	 public void showGraph() {
-		 BorderPane root = new BorderPane();
+			showBtt.setVisible(true);
+			FirstScreen.setVisible(false);
+			employeeIdDes.setVisible(true);
+			bestEmployeeBtt.setVisible(true);
+			optionsLabel.setVisible(true);
+			employeesListBtt.setVisible(true);
+			worstEmployeeBtt.setVisible(true);
+			employeeIdDes1.setVisible(true);
+			comBtt.setVisible(true);
 
 
-		 root.setCenter(graph.getScrollPane());
+		}catch(NumberFormatException e) {
+			Alert exception = new Alert(AlertType.ERROR);
+			exception.setHeaderText("Error");
+			exception.setTitle("ERROR");
+			exception.setContentText("Please provide the information required");
+			exception.showAndWait();
+		} catch (IOException e) {
+		} catch (EmployeeAlreadyCreatedException e) {
+		} catch (EmployeeNotRegisteredException e) {
+		}
+	}
 
-		 Scene scene = new Scene(root, 1024, 768);
+	public void FloydWarshall() {
+		double[][] done = wt.FloydWarshall();
+		graph.getPane().clear();
+		clean();
+		addGraphComponents(done);
 
-		 Stage primaryStage = new Stage();
-		 primaryStage.setTitle("Representation");
-		 scene.setFill(Color.BLACK);
-		 primaryStage.setFullScreen(true);
-		 primaryStage.setScene(scene);
-		 primaryStage.show();
+		showGraph();
+	}
 
-		 Layout layout = new RandomLayout(graph);
-		 layout.execute();
-	 }
+	private void addGraphComponents(double[][] matrix) {
+
+		Model model = graph.getModel();
+
+		graph.beginUpdate();
+
+		for(int i = 0; i < matrix.length; i++) {
+			model.addCell(String.valueOf(i), CellType.LABEL, i);
+		}
+
+		for(int i = 0; i < matrix.length; i++) {
+			for(int j = 0; j < matrix[0].length; j++) {
+				if(matrix[i][j] < Integer.MAX_VALUE) {
+					model.addEdge(String.valueOf(i), String.valueOf(j), matrix[i][j]);
+				}
+			}
+		}
+		graph.endUpdate();
+
+	}
+
+	public void getBestOption() {
+		try {
+			String id = employeeIdDes.getText();
+			Employee des = wt.searchEmployee(Integer.parseInt(id));
+			Employee best = wt.getBestOption(des);
+			if(best == null) bestLabl.setText("No best employee possible");
+			else bestLabl.setText(best.toString());
+			bestLabl.setVisible(true);
+
+		}catch(NumberFormatException n) {
+			Alert exception = new Alert(AlertType.ERROR);
+			exception.setHeaderText("Error");
+			exception.setTitle("ERROR");
+			exception.setContentText("Please provide the information required");
+			exception.showAndWait();
+		}catch(ArrayIndexOutOfBoundsException e) {
+			Alert exception = new Alert(AlertType.ERROR);
+			exception.setHeaderText("Error");
+			exception.setTitle("ERROR");
+			exception.setContentText("There is no Employee with that id");
+			exception.showAndWait();
+		}
+	}
+
+	public void getBestEmployeeCom() {
+		try {
+			String best = wt.getBestCommunication();
+		}catch(NumberFormatException n) {
+			Alert exception = new Alert(AlertType.ERROR);
+			exception.setHeaderText("Error");
+			exception.setTitle("ERROR");
+			exception.setContentText("Please provide the information required");
+			exception.showAndWait();
+		}catch(ArrayIndexOutOfBoundsException e) {
+			Alert exception = new Alert(AlertType.ERROR);
+			exception.setHeaderText("Error");
+			exception.setTitle("ERROR");
+			exception.setContentText("There is no Employee with that id");
+			exception.showAndWait();
+		}
+	}
+	
+	public void getWorstOption() {
+		try {
+			String id = employeeIdDes1.getText();
+			Employee des = wt.searchEmployee(Integer.parseInt(id));
+			Employee worst = wt.getWorstOption(des);
+			if(worst == null) worstLab.setText("No best employee possible");
+			else worstLab.setText(worst.toString());
+			worstLab.setVisible(true);
+		}catch(NumberFormatException n) {
+			Alert exception = new Alert(AlertType.ERROR);
+			exception.setHeaderText("Error");
+			exception.setTitle("ERROR");
+			exception.setContentText("Please provide the information required");
+			exception.showAndWait();
+		}
+//		catch(ArrayIndexOutOfBoundsException e) {
+//			Alert exception = new Alert(AlertType.ERROR);
+//			exception.setHeaderText("Error");
+//			exception.setTitle("ERROR");
+//			exception.setContentText("There is no Employee with that id");
+//			exception.showAndWait();
+//		}
+	}
+
+	public void getEmployeesList() {
+
+	}
+
+	public void clean() {
+		Model model = graph.getModel();
+
+		graph.beginUpdate();
+		model.clear();
+		graph.endUpdate();
+	}
+
+	public void showGraph() {
+		BorderPane root = new BorderPane();
+
+
+		root.setCenter(graph.getScrollPane());
+
+		Scene scene = new Scene(root, 1024, 768);
+
+		Stage primaryStage = new Stage();
+		primaryStage.setTitle("Representation");
+		scene.setFill(Color.BLACK);
+		primaryStage.setFullScreen(true);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+
+		Layout layout = new RandomLayout(graph);
+		layout.execute();
+	}
 }

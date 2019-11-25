@@ -31,7 +31,7 @@ public class WeTrustTest {
 
 	//Scenarios
 	public void scenary1() {
-		w = new WeTrust();
+		w = new WeTrust(true, 0);
 	}
 
 	public void scenary2() {

@@ -18,18 +18,18 @@ import myExceptions.EmployeeAlreadyCreatedException;
 import myExceptions.EmployeeNotRegisteredException;
 
 
-//public class Main extends Application{
-public class Main{
+public class Main extends Application{
+//public class Main{
 
-//		@Override
-//		public void start(Stage stage) throws IOException {
-//			Parent root = FXMLLoader.load(getClass().getResource("WeTrustGUI.fxml")); 
-//			Scene scene = new Scene(root);
-//			stage.setScene(scene);
-//			stage.setTitle("WeTrust");
-//			stage.show();
-//		}
-//
+		@Override
+		public void start(Stage stage) throws IOException {
+			Parent root = FXMLLoader.load(getClass().getResource("WeTrustGUI.fxml")); 
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.setTitle("WeTrust");
+			stage.show();
+		}
+
 //		public static void main(String[] args) {
 //			launch(args);
 //		}
@@ -68,16 +68,15 @@ public class Main{
 
 	 */
 	public static void main(String[] args){
-
 		try {
 
-			WeTrust w = new WeTrust();	
+			
 
 
 
 			int num = 5;
+			WeTrust w = new WeTrust(true, num);	
 
-			w.chooseS(true,num);
 			w.loadEmployees();
 			w.generateEmployees(num);
 			w.generateEmployeesTrust();
@@ -110,14 +109,13 @@ public class Main{
 			System.out.println("-------------------------------------------------");
 			System.out.println("Best option for " + w.getEmployees().get(0));
 			System.out.println(w.getBestOption(w.getEmployees().get(0)));
+			
+			System.out.println("-------------------------------------------------");
+			System.out.println("Best employees com");
+			System.out.println(w.getBestCommunication());
 			System.out.println("-------------------------------------------------");
 			System.out.println("Kruskal");
 			w.showMatrix(w.Kruskal());
-
-
-
-//			System.out.println(Arrays.toString(BFS.toArray())+"\n");
-
 
 		}catch(IOException e) {
 			System.out.println("Not found");
@@ -145,7 +143,7 @@ public class Main{
 //				System.out.println(g.toString());
 //				System.out.println();
 //				System.out.println();
-//			launch(args);
+			launch(args);
 //		
 //		
 	}

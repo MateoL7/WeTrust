@@ -36,9 +36,11 @@ public class WeTrust{
 	private IGraph<Employee> employeesTrust; 
 	//	private AdjacencyListGraph<Employee> employeesTrustL; 
 	private ArrayList<Employee> employees;
-	
+	private boolean whichStructure; 
 
-	public WeTrust() {
+
+	public WeTrust(boolean which, int tam) {
+		chooseS(which,tam);
 	}
 
 	public void loadEmployees() throws IOException, EmployeeAlreadyCreatedException {
@@ -60,8 +62,10 @@ public class WeTrust{
 
 	public void chooseS(boolean which, int tam) {
 		if(which) {
+			whichStructure = true;
 			employeesTrust = new AdjacencyMatrixGraph<Employee>(tam);
 		}else {
+			whichStructure = false;
 			employeesTrust = new AdjacencyListGraph<Employee>();
 		}
 	}
@@ -79,7 +83,7 @@ public class WeTrust{
 			times++;
 		}
 		pr.close();
-		}
+	}
 
 	public void generateEmployeesTrust() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(new File("data/generated.txt")));
@@ -102,7 +106,7 @@ public class WeTrust{
 				pr1.write(id1 + "," + id2 + "," + weight +"\n");
 				weight = Math.random()*900+100;	
 			}else {
-				
+
 			}
 			id1 = ran.nextInt(counter);
 			id2 = ran.nextInt(id1+1);
@@ -120,11 +124,11 @@ public class WeTrust{
 			int x = Integer.parseInt(info[0]);
 			int y = Integer.parseInt(info[1]);
 			double trust = Math.round((Double.parseDouble((info[2]))));
-			
-			
+
+
 			Employee e1 = employees.get(x);
 			Employee e2 = employees.get(y);
-			
+
 
 			employeesTrust.addEdge(e1, e2, trust);
 
@@ -173,15 +177,15 @@ public class WeTrust{
 			return null;
 		}
 	}
-	
+
 	public void setMatrix(double[][] m) {
 		((AdjacencyMatrixGraph<Employee>) employeesTrust).setMatrix(m);
 	}
 	public double[][] getemployeesTrust(){
-		return ((AdjacencyMatrixGraph<Employee>) employeesTrust).getMatrix();	
-	}
-	public double[][] getemployeesTrustL(){
-		((AdjacencyListGraph<Employee>)employeesTrust).makeWeightsMatrix();
+		if(whichStructure)
+			return ((AdjacencyMatrixGraph<Employee>) employeesTrust).getMatrix();
+		else
+			((AdjacencyListGraph<Employee>)employeesTrust).makeWeightsMatrix();
 		return ((AdjacencyListGraph<Employee>)employeesTrust).getWeightsMatrix();
 	}
 	public String getEmployeesTrustL() {
@@ -192,35 +196,39 @@ public class WeTrust{
 	public ArrayList<Employee> getBFS(Employee e) {
 		return ((AdjacencyMatrixGraph<Employee>) employeesTrust).BFS(e);
 	}
-	
+
 	public AdjacencyMatrixGraph<Employee> getGraphMatrix(){
 		return (AdjacencyMatrixGraph<Employee>) employeesTrust;
 	}
-	
+
 	public ArrayList<Employee> getDFS(Employee e) {
 		return ((AdjacencyMatrixGraph<Employee>) employeesTrust).DFS(e);
 	}	
-	
+
 	public double[][] FloydWarshall(){
+		if(whichStructure)
 		return (((AdjacencyMatrixGraph<Employee>) employeesTrust).FloydWarshall(getemployeesTrust()));
+		else
+			return ((AdjacencyListGraph<Employee>)employeesTrust).FloydWarshall(getemployeesTrust());
 	}
 	public double[][] Kruskal(){
+		if(whichStructure)
 		return (((AdjacencyMatrixGraph<Employee>) employeesTrust).Kruskal(getemployeesTrust()));
+		else
+			return ((AdjacencyListGraph<Employee>)employeesTrust).Kruskal(getemployeesTrust(), Integer.MAX_VALUE);
 	}
 
 	public ArrayList<Employee> adyacents(Employee employee) {
 		return (ArrayList<Employee>) ((AdjacencyMatrixGraph<Employee>) employeesTrust).adjacents(employee);
 	}
-	
+
 	public Employee getBestOption(Employee des) {
 		Employee best = null;
 		double[][] matrix;
 		int desId = des.getId();
-		if(((AdjacencyMatrixGraph<Employee>) employeesTrust)!= null) {
-			matrix = FloydWarshall();
-		}else{
-			matrix = ((AdjacencyListGraph<Employee>) employeesTrust).FloydWarshall(getemployeesTrustL());
-		}
+		
+		matrix = FloydWarshall();
+
 		double min = Integer.MAX_VALUE;
 		int minId = Integer.MAX_VALUE;
 
@@ -230,7 +238,56 @@ public class WeTrust{
 				minId = i;
 			}
 		}
+		if(minId == Integer.MAX_VALUE) return null;
 		best = searchEmployee(minId);
 		return best;
+	}
+	
+	public Employee getWorstOption(Employee des) {
+		Employee worst = null;
+		double[][] matrix;
+		int desId = des.getId();
+		
+		matrix = FloydWarshall();
+
+		double max = 0.0;
+		int maxId = Integer.MAX_VALUE;
+
+		for(int i = 0; i < matrix[desId].length;i++) {
+			if(max < matrix[desId][i] && i != desId) {
+				max = matrix[desId][i];
+				maxId = i;
+			}
+		}
+		if(maxId == Integer.MAX_VALUE) return null;
+		worst = searchEmployee(maxId);
+		return worst;
+	}
+	public String getBestCommunication() {
+		String msg = "";
+		double[][] matrix = Kruskal();
+		
+		for(int i = 0; i<matrix.length;i++) {
+			for(int j = i; j < matrix[0].length;j++) {
+				if(matrix[i][j] != 0 && matrix[i][j] < Integer.MAX_VALUE) {
+					msg += "\n" + searchEmployee(i) + " through " + searchEmployee(j);
+				}
+			}
+		}
+		return msg;
+	}
+
+	/**
+	 * @return the whichStructure
+	 */
+	public boolean isWhichStructure() {
+		return whichStructure;
+	}
+
+	/**
+	 * @param whichStructure the whichStructure to set
+	 */
+	public void setWhichStructure(boolean whichStructure) {
+		this.whichStructure = whichStructure;
 	}
 }
