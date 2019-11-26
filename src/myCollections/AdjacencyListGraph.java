@@ -67,7 +67,7 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 		vertices = new HashMap<V, Integer>();
 	}
 
-	@SuppressWarnings("unchecked")
+
 	@Override
 	public boolean addVertex(V v) {
 		boolean added = false;
@@ -97,15 +97,9 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 		return vertices.containsValue(v);
 	}
 
-	/*
-	 * 
-	 * @Override public void addEdge(V u, V v, double w) { // TODO Auto-generated
-	 * method stub
-	 * 
-	 * }
-	 */
 
-	@SuppressWarnings("unlikely-arg-type")
+
+
 	@Override
 	public boolean removeVertex(V v) {
 
@@ -182,17 +176,6 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 
 	}
 
-	/*
-	 * @Override public double[][] weightMatrix() { // TODO Auto-generated method
-	 * stub return null; }
-	 * 
-	 * @Override public boolean isDirected() { // TODO Auto-generated method stub
-	 * return isDirected; }
-	 * 
-	 * /**
-	 * 
-	 * @return all the vertices within the graph as a map data structure
-	 */
 	public Map<V, Integer> getVertices() {
 		return vertices;
 	}
@@ -204,12 +187,7 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 	public List<Pair<V, List<Pair<V, Double>>>> getAdjacencyList() {
 		return adjacencyLists;
 	}
-	/*
-	 * @Override public int getIndex(V u) { return vertices.get(u); }
-	 * 
-	 * @Override public int getVertexSize() { return vertices.size(); }
-	 */
-
+	
 	@Override
 	public void addEdge(V u, V v, double w) {
 		// TODO Auto-generated method stub
@@ -414,9 +392,41 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 
 
 	@Override
-	public void prim(double[][] matrix) {
-		// TODO Auto-generated method stub
+	public void prim(double[][] matrix){	
+		int[] mst = new int[matrix.length];	
+		int[] weight = new int[matrix.length];	
+		boolean[] inMst = new boolean[matrix.length];
+		for (int i = 0; i < matrix.length; i++) {
+			weight[i] = Integer.MAX_VALUE;
+			inMst[i] = false;
+		}		
+
 		
+		weight[0] = 0; 
+		mst[0] = -1;			
+
+		for (int i = 0; i < matrix.length-1; i++) {
+			int u = minVertex(weight, inMst, matrix.length);
+			inMst[u] = true;
+			for (int j = 0; j < matrix.length; j++) {
+				if(matrix[u][j] != 0 && inMst[j] == false && matrix[u][j] < weight[j]){
+					mst[j] = u;
+					weight[j] = (int) matrix[u][j];
+				}
+			}
+		}
+	}
+	
+	public int minVertex(int[] weight, boolean[] inMst, int vertices){
+		int minValue = Integer.MAX_VALUE;
+		int minVertex = -1;
+		for (int i = 0; i < vertices; i++) {
+			if(inMst[i] == false && weight[i] < minValue){
+				minValue = weight[i];
+				minVertex = i;
+			}
+		}
+		return minVertex;
 	}
 
 	@Override
