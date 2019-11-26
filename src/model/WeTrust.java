@@ -215,7 +215,7 @@ public class WeTrust{
 		if(whichStructure)
 		return (((AdjacencyMatrixGraph<Employee>) employeesTrust).Kruskal(getemployeesTrust()));
 		else
-			return ((AdjacencyListGraph<Employee>)employeesTrust).Kruskal(getemployeesTrust(), Integer.MAX_VALUE);
+			return ((AdjacencyListGraph<Employee>)employeesTrust).Kruskal(getemployeesTrust());
 	}
 
 	public ArrayList<Employee> adyacents(Employee employee) {

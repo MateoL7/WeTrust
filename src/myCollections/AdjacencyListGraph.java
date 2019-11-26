@@ -1,8 +1,10 @@
 package myCollections;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -226,6 +228,9 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 
 				uList.add(new Pair<V, Double>(v, w));
 				vList.add(new Pair<V, Double>(u, w));
+				
+				Collections.sort(uList);
+				Collections.sort(vList);
 
 			} else {
 				uList.add(new Pair<V, Double>(v, w));
@@ -239,7 +244,9 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 		return null;
 	}
 
-	public double[][] Kruskal(double[][] weights, int inf) {
+	@Override
+	public double[][] Kruskal(double[][] weights) {
+		int inf = Integer.MAX_VALUE;
 		UnionFind<Integer> set = new UnionFind<>();
 
 		double[][] MST = new double[weights.length][weights.length];
@@ -378,14 +385,33 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 	@Override
 	public ArrayList<V> BFS(V vertex) {
 		// TODO Auto-generated method stub
-		return null;
+		 //
+		ArrayList<V> bfs = new ArrayList<V>();
+		boolean[] visited = new boolean[adjacencyLists.size()];
+		LinkedList<V> queue = new LinkedList<V>();
+		visited[vertices.get(vertex)] = true; 
+		queue.add(vertex);
+		
+		while(queue.size()!=0) {
+			
+			vertex = queue.poll();
+			bfs.add(vertex);
+			List<Pair<V,Double>> vList= adjacencyLists.get(vertices.get(vertex)).getSecond();
+			for (int i = 0; i < vList.size(); i++) {
+				vertex = vList.get(i).getFirst();
+				int index = vertices.get(vertex);
+				if(!visited[index]) {
+					queue.add(vertex);
+					visited[vertices.get(vertex)]=true;
+				}
+			}
+			
+		}
+		
+		return bfs;
 	}
 
-	@Override
-	public double[][] Kruskal(double[][] weights) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public void prim(double[][] matrix) {
