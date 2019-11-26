@@ -1,6 +1,9 @@
 package userInterface;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import javafx.event.ActionEvent;
@@ -76,6 +79,8 @@ public class GUIController {
 	
 	private Scene scene;
 	
+	private int size;
+	
 	public void setScene(Scene scene) {
 		this.scene = scene;
 	}
@@ -126,6 +131,7 @@ public class GUIController {
 			if(resulType.get() == buttonTypeOne) {
 				MorL = true;
 				int num = Integer.parseInt(numOfEmp.getText());
+				size = num;
 				wt = new WeTrust(MorL, num);
 				wt.loadEmployees();
 				wt.generateEmployees(num);
@@ -144,6 +150,7 @@ public class GUIController {
 			}else if(resulType.get() == buttonTypeTwo) {
 				MorL = false;
 				int num = Integer.parseInt(numOfEmp.getText());
+				size = num;
 				wt = new WeTrust(MorL, num);
 				wt.loadEmployees();
 				wt.generateEmployees(num);
@@ -235,6 +242,16 @@ public class GUIController {
 	public void getBestEmployeeCom() throws IOException {
 		try {
 			String best = wt.getBestCommunication();
+			if(size > 20) {
+				Alert exception = new Alert(AlertType.INFORMATION);
+				exception.setHeaderText("Number of employees exceeds the maximum allowed");
+				exception.setTitle("Information");
+				exception.setContentText("For this reason, only the first 20 relationships will be shown on the screen, the rest can be found in the folder called 'data' in the File named 'Communication'");
+				exception.showAndWait();
+				PrintWriter pr = new PrintWriter(new File("data/Communication.txt"));
+				pr.write(best);
+				pr.close();
+			}
 			System.out.println(best);
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CommunicationPath.fxml"));
 			Parent root = fxmlLoader.load();
@@ -267,7 +284,7 @@ public class GUIController {
 			String id = employeeIdDes1.getText();
 			Employee des = wt.searchEmployee(Integer.parseInt(id));
 			Employee worst = wt.getWorstOption(des);
-			if(worst == null) worstLab.setText("No best employee possible");
+			if(worst == null) worstLab.setText("No worst employee possible");
 			else worstLab.setText(worst.toString());
 			worstLab.setVisible(true);
 		}catch(NumberFormatException n) {
@@ -280,6 +297,7 @@ public class GUIController {
 	}
 
 	public void getEmployeesList() {
+		ArrayList<Employee> a = wt.getEmployees();
 		
 	}
 
@@ -306,6 +324,13 @@ public class GUIController {
 	}
 
 	public void showGraph() {
+		if(size > 20) {
+			Alert exception = new Alert(AlertType.INFORMATION);
+			exception.setHeaderText("Number of employees exceeds the recommended");
+			exception.setTitle("Information");
+			exception.setContentText("For this reason, we offer our apologies if the graph is not very understandable and takes a while to load.");
+			exception.showAndWait();
+		}
 		BorderPane root = new BorderPane();
 
 

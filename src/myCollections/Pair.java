@@ -1,7 +1,5 @@
 package myCollections ;
 
-import java.util.Comparator;
-
 /**
  * Class Pair
  * @author Mateo Loaiza
