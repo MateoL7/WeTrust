@@ -93,8 +93,8 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 	 * @param v Vertex to be searched
 	 * @return True if found or false if not
 	 */
-	private boolean searchVertex(V v) {
-		return vertices.containsValue(v);
+	public boolean searchVertex(V v) {
+		return vertices.containsKey(v);
 	}
 
 
@@ -165,11 +165,33 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 //		This return exists in case there is no need of being specific about the direction
 
 		if (isDirected) {
-			return adjacencyLists.get(uValue).getSecond().contains(v);
+			boolean c = false;
+			for (int i = 0; i < adjacencyLists.get(uValue).getSecond().size(); i++) {
+				if(adjacencyLists.get(uValue).getSecond().get(i).getFirst().equals(v)) {
+					c=true;
+				}
+			}
+			return c;
 			// this returns if u connected and directed to v
 		} else {
-			return adjacencyLists.get(uValue).getSecond().contains(v)
-					&& adjacencyLists.get(vValue).getSecond().contains(u);
+			
+			boolean c = false;
+			for (int i = 0; i < adjacencyLists.get(uValue).getSecond().size(); i++) {
+				
+				if(adjacencyLists.get(uValue).getSecond().get(i).getFirst().equals(v)) {
+					c=true;
+				}
+			}
+			
+			boolean cc = false;
+			for (int i = 0; i < adjacencyLists.get(vValue).getSecond().size(); i++) {
+				if(adjacencyLists.get(vValue).getSecond().get(i).getFirst().equals(u)) {
+					cc=true;
+				}
+			}
+			
+			
+			return c&&cc;
 			// in case the graph is not connected then both should be connected to each
 			// other
 		}
@@ -298,7 +320,7 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
 				if (i != j)
-					weightsMatrix[i][j] = Integer.MAX_VALUE;
+					weightsMatrix[i][j] = Double.MAX_VALUE;
 				else
 					weightsMatrix[i][j] = 0.0;
 			}
