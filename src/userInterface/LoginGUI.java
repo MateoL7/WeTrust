@@ -35,6 +35,7 @@ public class LoginGUI {
 	public void setScene(Scene scene) {
 		this.scene = scene;
 	}
+	private GUIController gc;
 
 	@FXML
 	public void cancelLogin(ActionEvent event) {
@@ -57,8 +58,11 @@ public class LoginGUI {
 			String pass = password.getText();
 			if(usern.equalsIgnoreCase("manager") && pass.equalsIgnoreCase("wetrust")) {
 				((Stage) scene.getWindow()).close();
-				Parent root = FXMLLoader.load(getClass().getResource("WeTrustGUI.fxml")); 
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WeTrustGUI.fxml"));
+				Parent root = fxmlLoader.load();
 				Scene scene = new Scene(root);
+				gc = fxmlLoader.getController();
+				gc.setScene(scene);
 				Stage stage = new Stage();
 				stage.setScene(scene);
 				stage.setTitle("WeTrust");

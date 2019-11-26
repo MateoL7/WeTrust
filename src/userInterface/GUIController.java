@@ -3,6 +3,7 @@ package userInterface;
 import java.io.IOException;
 import java.util.Optional;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,8 +15,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -74,6 +73,12 @@ public class GUIController {
 
 	private Graph graph;
 	private WeTrust wt;
+	
+	private Scene scene;
+	
+	public void setScene(Scene scene) {
+		this.scene = scene;
+	}
 
 	@FXML
 	public void initialize() {
@@ -272,13 +277,6 @@ public class GUIController {
 			exception.setContentText("Please provide the information required");
 			exception.showAndWait();
 		}
-//		catch(ArrayIndexOutOfBoundsException e) {
-//			Alert exception = new Alert(AlertType.ERROR);
-//			exception.setHeaderText("Error");
-//			exception.setTitle("ERROR");
-//			exception.setContentText("There is no Employee with that id");
-//			exception.showAndWait();
-//		}
 	}
 
 	public void getEmployeesList() {
@@ -291,6 +289,20 @@ public class GUIController {
 		graph.beginUpdate();
 		model.clear();
 		graph.endUpdate();
+	}
+	
+	@FXML
+	public void exit(ActionEvent event) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation Dialog");
+		alert.setHeaderText("You are about to exit the program");
+		alert.setContentText("Are you ok with this?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+			((Stage) scene.getWindow()).close();
+		} else {
+		}	
 	}
 
 	public void showGraph() {

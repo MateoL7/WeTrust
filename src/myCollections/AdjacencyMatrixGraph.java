@@ -1,19 +1,15 @@
 package myCollections;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.NavigableSet;
 import java.util.Queue;
 import java.util.Stack;
-import java.util.TreeSet;
 
 import myExceptions.EmployeeAlreadyCreatedException;
 import myExceptions.EmployeeNotRegisteredException;
@@ -80,6 +76,20 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 		adjacencyMatrix = new double[capacity][capacity];
 		vertices = new HashMap<>();
 		verticesIndices = new HashMap<>();
+	}
+
+	/**
+	 * @return the size
+	 */
+	public int getSize() {
+		return size;
+	}
+
+	/**
+	 * @param size the size to set
+	 */
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 	/**

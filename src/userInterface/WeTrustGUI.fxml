@@ -50,6 +50,11 @@
                   <Font name="Comic Sans MS" size="18.0" />
                </font>
             </Label>
+            <Button fx:id="exitbtt" layoutX="523.0" layoutY="272.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: BLACK;" text="EXIT" textFill="#ff7300" underline="true">
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </children>
