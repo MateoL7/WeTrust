@@ -421,8 +421,26 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 
 	@Override
 	public ArrayList<V> DFS(V vertex) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		boolean[] visited = new boolean[adjacencyLists.size()];
+		ArrayList<V> dfs = new ArrayList<V>();
+		DFS(vertex, visited, dfs);
+		return dfs;
+	}
+	
+	public void DFS(V vertex, boolean[] visited, ArrayList<V> dfs){
+		
+		visited[vertices.get(vertex)]=true;
+		dfs.add(vertex);
+		
+		List<Pair<V,Double>> vList= adjacencyLists.get(vertices.get(vertex)).getSecond();
+		for (int i = 0; i < vList.size(); i++) {
+			vertex = vList.get(i).getFirst();
+			if(!visited[vertices.get(vertex)]) {
+				DFS(vertex, visited, dfs);
+			}
+		}
+		
 	}
 
 }

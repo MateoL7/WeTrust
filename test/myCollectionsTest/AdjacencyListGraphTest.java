@@ -40,8 +40,19 @@ class AdjacencyListGraphTest {
 		
 		setUpScenary2();
 		ArrayList<Character> arrayL = g.BFS('B');
-		assertTrue("Bfs is not searching in the tree in the correct order", arrayL.toString().equals("[B, D, E, C, A]"));
+		assertTrue("BFS is not searching in the tree in the correct order", arrayL.toString().equals("[B, D, E, C, A]"));
 		
 	}
+	
+	@Test
+	void DFSTest() {
+		
+		setUpScenary2();
+		ArrayList<Character> arrayL = g.DFS('B');
+		assertTrue("DFS is not searching in the tree in the correct order", arrayL.toString().equals("[B, D, C, A, E]"));
+		
+	}
+	
+	
 
 }
