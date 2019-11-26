@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterface.LoginGUI">
    <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Login-01.jpg" />
+         </image>
+      </ImageView>
       <TextField fx:id="username" layoutX="190.0" layoutY="180.0" prefHeight="25.0" prefWidth="188.0" promptText="Username" />
       <PasswordField fx:id="password" layoutX="190.0" layoutY="216.0" prefHeight="25.0" prefWidth="188.0" promptText="Password" />
-      <Button fx:id="loginBt" layoutX="333.0" layoutY="260.0" mnemonicParsing="false" onAction="#login" text="Login" />
-      <Button fx:id="cancelBt" layoutX="191.0" layoutY="260.0" mnemonicParsing="false" onAction="#cancelLogin" text="Cancel" />
-      <Label layoutX="162.0" layoutY="59.0" prefHeight="101.0" prefWidth="259.0" text="WeTrust" textFill="#f8f8f8">
-         <font>
-            <Font name="Berlin Sans FB" size="66.0" />
-         </font>
-      </Label>
+      <Button fx:id="loginBt" layoutX="313.0" layoutY="260.0" mnemonicParsing="false" onAction="#login" prefHeight="25.0" prefWidth="65.0" text="Login" />
+      <Button fx:id="cancelBt" layoutX="191.0" layoutY="260.0" mnemonicParsing="false" onAction="#cancelLogin" prefHeight="25.0" prefWidth="65.0" text="Cancel" />
    </children>
 </Pane>
