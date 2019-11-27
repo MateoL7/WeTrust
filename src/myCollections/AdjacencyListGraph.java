@@ -308,7 +308,7 @@ public class AdjacencyListGraph<V extends Comparable<V>> implements IGraph<V> {
 				MST[arista.getB()][arista.getA()] = arista.getP();
 			}
 		}
-		System.out.println(set.size());
+	
 		return MST;
 	}
 

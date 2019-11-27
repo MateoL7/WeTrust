@@ -216,7 +216,7 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 	public double[][] getMatrix() {
 		return adjacencyMatrix;
 	}
-	
+
 	public void setMatrix(double[][] matrix) {
 		adjacencyMatrix = matrix;
 	}
@@ -255,10 +255,10 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 	public ArrayList<T> DFS(T vertex){
 		ArrayList<T> result = new ArrayList<>();
 		Stack<T> options = new Stack<>();
-	
-		
+
+
 		options.push(vertex);
-		
+
 		while(!options.empty()) {
 			ArrayList<T> visited = new ArrayList<>();
 			T actual = options.pop();
@@ -274,7 +274,7 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 				}
 			}
 		}
-		
+
 		return result;
 	}
 
@@ -285,7 +285,7 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 		}
 		return found;
 	}
-	
+
 	private T maxAux(ArrayList<T> ar, ArrayList<T> vis) {
 		T max = ar.get(0);
 		for(int i =0; i < ar.size(); i++) {
@@ -333,63 +333,65 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 		int inf = Integer.MAX_VALUE;
 		UnionFind<Integer> set = new UnionFind<>();
 
-		double[][] MST = new double[weights.length][weights.length];		
+		double[][] MST = new double[weights.length][weights.length];
 
-		for(int i = 0; i < weights.length; i++)
-			set.makeSet(i);		
-		class obj {			
+		for (int i = 0; i < weights.length; i++)
+			set.makeSet(i);
+		class obj {
 			int A;
 			int B;
-			double P;			
-			obj(int a, int b, double weight){
+			double P;
+
+			obj(int a, int b, double weight) {
 				A = a;
 				B = b;
 				P = weight;
 			}
+
 			int getA() {
 				return A;
-			}	
+			}
+
 			int getB() {
 				return B;
 			}
+
 			double getP() {
 				return P;
 			}
-		}		
-		ArrayList<obj> aristas = new ArrayList<>();		
-		for(int i = 0; i < weights.length;  i++) {
-			for(int j = 0; j < weights.length; j++) {
+		}
+		ArrayList<obj> aristas = new ArrayList<>();
+		for (int i = 0; i < weights.length; i++) {
+			for (int j = 0; j < weights.length; j++) {
 				double weight = weights[i][j];
-				if(weight > 0 && weight < inf) {
+				if (weight > 0 && weight < inf) {
 					obj o = new obj(i, j, weight);
 					aristas.add(o);
 				}
 			}
-		}	
+		}
 
-		Comparator<obj> comparator = new Comparator<obj>() {			
+		Comparator<obj> comparator = new Comparator<obj>() {
 
 			public int compare(obj a, obj b) {
-				if(a.getP() > b.getP())
-					return  1;
+				if (a.getP() > b.getP())
+					return 1;
 				else if (a.getP() < b.getP())
 					return -1;
 				else
 					return 0;
 			}
-		};	
+		};
 
-
-		aristas.sort(comparator);		
-		for(int i = 0; i < aristas.size(); i++) {
+		aristas.sort(comparator);
+		for (int i = 0; i < aristas.size(); i++) {
 			obj arista = aristas.get(i);
-			if(set.findSet(arista.getA()) != set.findSet(arista.getB())) {
+			if (set.findSet(arista.getA()) != set.findSet(arista.getB())) {
 				set.union(arista.getA(), arista.getB());
 				MST[arista.getA()][arista.getB()] = arista.getP();
 				MST[arista.getB()][arista.getA()] = arista.getP();
 			}
 		}
-		//		System.out.println(set.size());
 		return MST;
 	}
 

@@ -123,7 +123,7 @@ public class GUIController {
 			Optional<ButtonType> resulType = alert.showAndWait();
 
 			if(resulType.get() == buttonTypeOne) {
-				MorL = true;
+				MorL = false;
 				int num = Integer.parseInt(numOfEmp.getText());
 				size = num;
 				wt = new WeTrust(MorL, num);
@@ -178,14 +178,6 @@ public class GUIController {
 		}
 	}
 
-	public void FloydWarshall() {
-		double[][] done = wt.FloydWarshall();
-		graph.getPane().clear();
-		clean();
-		addGraphComponents(done);
-
-		showGraph();
-	}
 
 	private void addGraphComponents(double[][] matrix) {
 
@@ -211,8 +203,11 @@ public class GUIController {
 	public void getBestOption() {
 		try {
 			String id = employeeIdDes.getText();
+			
 			Employee des = wt.searchEmployee(Integer.parseInt(id));
+			
 			Employee best = wt.getBestOption(des);
+			
 			if(best == null) bestLabl.setText("No best employee possible");
 			else bestLabl.setText(best.toString());
 			bestLabl.setVisible(true);

@@ -137,7 +137,7 @@ public class WeTrust{
 			System.out.print("|");
 			for (int y=0; y < m[x].length; y++) {
 				if(m[x][y] == Integer.MAX_VALUE) {
-					System.out.print("$");
+					System.out.print("MAX");
 				}
 				else {
 					System.out.print(m[x][y]);
@@ -207,10 +207,11 @@ public class WeTrust{
 	}	
 
 	public double[][] FloydWarshall(){
+		double[][] matrix = getemployeesTrust();
 		if(whichStructure)
-			return (((AdjacencyMatrixGraph<Employee>) employeesTrust).FloydWarshall(getemployeesTrust()));
+			return (((AdjacencyMatrixGraph<Employee>) employeesTrust).FloydWarshall(matrix));
 		else
-			return ((AdjacencyListGraph<Employee>)employeesTrust).FloydWarshall(getemployeesTrust());
+			return ((AdjacencyListGraph<Employee>)employeesTrust).FloydWarshall(matrix);
 	}
 	public double[][] Kruskal(){
 		if(whichStructure)
@@ -227,8 +228,8 @@ public class WeTrust{
 		Employee best = null;
 		double[][] matrix;
 		int desId = des.getId();
-
 		matrix = FloydWarshall();
+		
 
 		double min = Integer.MAX_VALUE;
 		int minId = Integer.MAX_VALUE;
@@ -248,8 +249,9 @@ public class WeTrust{
 		Employee worst = null;
 		double[][] matrix;
 		int desId = des.getId();
-
+	
 		matrix = FloydWarshall();
+
 
 		double max = 0.0;
 		int maxId = Integer.MAX_VALUE;
