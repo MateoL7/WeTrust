@@ -3,9 +3,7 @@ package userInterface;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Optional;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,8 +49,6 @@ public class GUIController {
     @FXML
     private Label worstLab;
     
-    @FXML
-    private Button employeesListBtt;
 
     @FXML
     private Button bestEmployeeBtt;
@@ -92,7 +88,6 @@ public class GUIController {
 		employeeIdDes.setVisible(false);
 		bestEmployeeBtt.setVisible(false);
 		optionsLabel.setVisible(false);
-		employeesListBtt.setVisible(false);
 		bestLabl.setVisible(false);
 		worstEmployeeBtt.setVisible(false);
 		employeeIdDes1.setVisible(false);
@@ -167,7 +162,6 @@ public class GUIController {
 			employeeIdDes.setVisible(true);
 			bestEmployeeBtt.setVisible(true);
 			optionsLabel.setVisible(true);
-			employeesListBtt.setVisible(true);
 			worstEmployeeBtt.setVisible(true);
 			employeeIdDes1.setVisible(true);
 			comBtt.setVisible(true);
@@ -252,7 +246,6 @@ public class GUIController {
 				pr.write(best);
 				pr.close();
 			}
-			System.out.println(best);
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CommunicationPath.fxml"));
 			Parent root = fxmlLoader.load();
 			Scene scene = new Scene(root);
@@ -294,11 +287,6 @@ public class GUIController {
 			exception.setContentText("Please provide the information required");
 			exception.showAndWait();
 		}
-	}
-
-	public void getEmployeesList() {
-		ArrayList<Employee> a = wt.getEmployees();
-		
 	}
 
 	public void clean() {

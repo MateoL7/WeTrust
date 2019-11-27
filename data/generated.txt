@@ -48,5 +48,3 @@ Id: 46 Name: Kirstin Beck
 Id: 47 Name: Jessamine Vahl
 Id: 48 Name: Petra Wakeley
 Id: 49 Name: Hubert Swadon
-Id: 50 Name: Nissy Burtwell
-Id: 51 Name: Lois Marzele
