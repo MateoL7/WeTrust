@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -50,9 +52,6 @@ public class GUIController {
 
     @FXML
     private Label worstLab;
-    
-    @FXML
-    private Button employeesListBtt;
 
     @FXML
     private Button bestEmployeeBtt;
@@ -92,7 +91,6 @@ public class GUIController {
 		employeeIdDes.setVisible(false);
 		bestEmployeeBtt.setVisible(false);
 		optionsLabel.setVisible(false);
-		employeesListBtt.setVisible(false);
 		bestLabl.setVisible(false);
 		worstEmployeeBtt.setVisible(false);
 		employeeIdDes1.setVisible(false);
@@ -167,7 +165,6 @@ public class GUIController {
 			employeeIdDes.setVisible(true);
 			bestEmployeeBtt.setVisible(true);
 			optionsLabel.setVisible(true);
-			employeesListBtt.setVisible(true);
 			worstEmployeeBtt.setVisible(true);
 			employeeIdDes1.setVisible(true);
 			comBtt.setVisible(true);
@@ -293,11 +290,48 @@ public class GUIController {
 			exception.setTitle("ERROR");
 			exception.setContentText("Please provide the information required");
 			exception.showAndWait();
+		}catch(ArrayIndexOutOfBoundsException e) {
+			Alert exception = new Alert(AlertType.ERROR);
+			exception.setHeaderText("Error");
+			exception.setTitle("ERROR");
+			exception.setContentText("There is no Employee with that id");
+			exception.showAndWait();
 		}
 	}
 
 	public void getEmployeesList() {
-		ArrayList<Employee> a = wt.getEmployees();
+		TextInputDialog idE = new TextInputDialog();
+		idE.setHeaderText("Id of the employee to start from");
+		Optional<String> m1 = idE.showAndWait();
+		if(m1.isPresent()) {
+		int	id = Integer.parseInt(m1.get());
+		System.out.println(id);
+			Employee e1 = wt.searchEmployee(id);
+			if(e1 != null) {
+			System.out.println(e1);
+			String msg = "Employees List from " + e1;
+			System.out.println(msg);
+			ArrayList<Employee> a = wt.getBFS(wt.getEmployees().get(id));
+			System.out.println(Arrays.toString(a.toArray()));
+			for(int i = 0; i < a.size(); i++) {
+				msg += "\n" + a.get(i);
+			}
+			System.out.println(msg);
+			}else {
+				Alert exception = new Alert(AlertType.ERROR);
+				exception.setHeaderText("Error");
+				exception.setTitle("ERROR");
+				exception.setContentText("No employee found with that id");
+				exception.showAndWait();
+			}
+		}else {
+			Alert exception = new Alert(AlertType.ERROR);
+			exception.setHeaderText("Error");
+			exception.setTitle("ERROR");
+			exception.setContentText("Please provide the information required");
+			exception.showAndWait();
+		}
+		
 		
 	}
 

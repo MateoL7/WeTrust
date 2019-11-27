@@ -189,7 +189,10 @@ public class WeTrust{
 
 
 	public ArrayList<Employee> getBFS(Employee e) {
-		return ((AdjacencyMatrixGraph<Employee>) employeesTrust).BFS(e);
+		if(whichStructure)
+			return ((AdjacencyMatrixGraph<Employee>) employeesTrust).BFS(e);
+		else
+			return ((AdjacencyListGraph<Employee>)employeesTrust).BFS(e);
 	}
 
 	public AdjacencyMatrixGraph<Employee> getGraphMatrix(){
@@ -197,18 +200,21 @@ public class WeTrust{
 	}
 
 	public ArrayList<Employee> getDFS(Employee e) {
-		return ((AdjacencyMatrixGraph<Employee>) employeesTrust).DFS(e);
+		if(whichStructure)
+			return ((AdjacencyMatrixGraph<Employee>) employeesTrust).DFS(e);
+		else
+			return ((AdjacencyListGraph<Employee>)employeesTrust).DFS(e);
 	}	
 
 	public double[][] FloydWarshall(){
 		if(whichStructure)
-		return (((AdjacencyMatrixGraph<Employee>) employeesTrust).FloydWarshall(getemployeesTrust()));
+			return (((AdjacencyMatrixGraph<Employee>) employeesTrust).FloydWarshall(getemployeesTrust()));
 		else
 			return ((AdjacencyListGraph<Employee>)employeesTrust).FloydWarshall(getemployeesTrust());
 	}
 	public double[][] Kruskal(){
 		if(whichStructure)
-		return (((AdjacencyMatrixGraph<Employee>) employeesTrust).Kruskal(getemployeesTrust()));
+			return (((AdjacencyMatrixGraph<Employee>) employeesTrust).Kruskal(getemployeesTrust()));
 		else
 			return ((AdjacencyListGraph<Employee>)employeesTrust).Kruskal(getemployeesTrust());
 	}
@@ -221,7 +227,7 @@ public class WeTrust{
 		Employee best = null;
 		double[][] matrix;
 		int desId = des.getId();
-		
+
 		matrix = FloydWarshall();
 
 		double min = Integer.MAX_VALUE;
@@ -237,12 +243,12 @@ public class WeTrust{
 		best = searchEmployee(minId);
 		return best;
 	}
-	
+
 	public Employee getWorstOption(Employee des) {
 		Employee worst = null;
 		double[][] matrix;
 		int desId = des.getId();
-		
+
 		matrix = FloydWarshall();
 
 		double max = 0.0;
