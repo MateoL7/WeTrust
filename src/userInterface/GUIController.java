@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -249,7 +248,6 @@ public class GUIController {
 				pr.write(best);
 				pr.close();
 			}
-			System.out.println(best);
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CommunicationPath.fxml"));
 			Parent root = fxmlLoader.load();
 			Scene scene = new Scene(root);
@@ -299,41 +297,6 @@ public class GUIController {
 		}
 	}
 
-	public void getEmployeesList() {
-		TextInputDialog idE = new TextInputDialog();
-		idE.setHeaderText("Id of the employee to start from");
-		Optional<String> m1 = idE.showAndWait();
-		if(m1.isPresent()) {
-		int	id = Integer.parseInt(m1.get());
-		System.out.println(id);
-			Employee e1 = wt.searchEmployee(id);
-			if(e1 != null) {
-			System.out.println(e1);
-			String msg = "Employees List from " + e1;
-			System.out.println(msg);
-			ArrayList<Employee> a = wt.getBFS(wt.getEmployees().get(id));
-			System.out.println(Arrays.toString(a.toArray()));
-			for(int i = 0; i < a.size(); i++) {
-				msg += "\n" + a.get(i);
-			}
-			System.out.println(msg);
-			}else {
-				Alert exception = new Alert(AlertType.ERROR);
-				exception.setHeaderText("Error");
-				exception.setTitle("ERROR");
-				exception.setContentText("No employee found with that id");
-				exception.showAndWait();
-			}
-		}else {
-			Alert exception = new Alert(AlertType.ERROR);
-			exception.setHeaderText("Error");
-			exception.setTitle("ERROR");
-			exception.setContentText("Please provide the information required");
-			exception.showAndWait();
-		}
-		
-		
-	}
 
 	public void clean() {
 		Model model = graph.getModel();
