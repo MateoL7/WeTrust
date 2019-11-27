@@ -27,6 +27,9 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 	 * The length of the matrix when using the default Constructor.
 	 */
 	private static final int DEFAULT_CAPACITY = 25;
+	
+	private int sizeN;
+	
 
 	/**
 	 * The last index in the matrix at which a vertex exists.
@@ -111,6 +114,7 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 				verticesIndices.put(v, newKey);
 			}
 			added = true;
+			sizeN++;
 		}else {
 			throw new EmployeeAlreadyCreatedException();
 		}
@@ -157,6 +161,7 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 			verticesIndices.remove(v);
 			vertices.remove(key);
 			removed = true;
+			sizeN--;
 		}
 		return removed;
 	}
@@ -299,7 +304,14 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 
 	@Override
 	public double[][] FloydWarshall(double[][] W) {
-
+		
+		for (int i = 0; i < W.length; i++) {
+			for (int j = 0; j < W.length; j++) {
+				System.out.print(W[i][j]+" "); //RESPUESTA CORRECTA YA LA VERIFIQUE imprimir respuesta
+			}
+			System.out.println();
+		}
+		
 		int n = W.length;
 		double[][] D = W;
 		double v = 0;
@@ -432,5 +444,24 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 				}
 			}
 		}
+	}
+	
+	public double[][] getWeightMatrix() {
+		double[][] w = new double[sizeN][sizeN];
+		
+		for (int i = 0; i < w.length; i++) {
+			for (int j = 0; j < w.length; j++) {
+				if(i==j) {
+					w[i][j]=0;
+				}else {
+					if(adjacencyMatrix[i][j]==0)
+						w[i][j]=Double.MAX_VALUE;
+					else
+						w[i][j] = adjacencyMatrix[i][j];
+				}		
+			}
+		}
+		
+		return w;
 	}
 }

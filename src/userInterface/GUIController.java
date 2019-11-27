@@ -123,7 +123,7 @@ public class GUIController {
 			Optional<ButtonType> resulType = alert.showAndWait();
 
 			if(resulType.get() == buttonTypeOne) {
-				MorL = false;
+				MorL = true;
 				int num = Integer.parseInt(numOfEmp.getText());
 				size = num;
 				wt = new WeTrust(MorL, num);

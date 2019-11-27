@@ -178,7 +178,7 @@ public class WeTrust{
 	}
 	public double[][] getemployeesTrust(){
 		if(whichStructure)
-			return ((AdjacencyMatrixGraph<Employee>) employeesTrust).getMatrix();
+			return ((AdjacencyMatrixGraph<Employee>) employeesTrust).getWeightMatrix();
 		else
 			((AdjacencyListGraph<Employee>)employeesTrust).makeWeightsMatrix();
 		return ((AdjacencyListGraph<Employee>)employeesTrust).getWeightsMatrix();
