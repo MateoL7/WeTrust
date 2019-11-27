@@ -1,10 +1,2 @@
 Id: 0 Name: Juan Reyes
 Id: 1 Name: Kirbee Reeman
-Id: 2 Name: Brandi Lepard
-Id: 3 Name: Brynna Edwinson
-Id: 4 Name: Pennie Sandeson
-Id: 5 Name: Aimee Griniov
-Id: 6 Name: Rustie Bode
-Id: 7 Name: Deonne Skyppe
-Id: 8 Name: Cart Bartlet
-Id: 9 Name: Kai Gytesham

@@ -304,14 +304,7 @@ public class AdjacencyMatrixGraph<T extends Comparable<T>> implements IGraph<T> 
 
 	@Override
 	public double[][] FloydWarshall(double[][] W) {
-		
-		for (int i = 0; i < W.length; i++) {
-			for (int j = 0; j < W.length; j++) {
-				System.out.print(W[i][j]+" "); //RESPUESTA CORRECTA YA LA VERIFIQUE imprimir respuesta
-			}
-			System.out.println();
-		}
-		
+			
 		int n = W.length;
 		double[][] D = W;
 		double v = 0;

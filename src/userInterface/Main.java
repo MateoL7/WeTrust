@@ -22,34 +22,6 @@ public class Main extends Application{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
 		Parent root = fxmlLoader.load();
 
-		AdjacencyMatrixGraph<Character> g = new AdjacencyMatrixGraph<Character>();
-		
-		/*
-		g.addVertex('A');
-		g.addVertex('B');
-		g.addVertex('C');
-		g.addVertex('D');
-		g.addVertex('E');
-		g.addEdge('B', 'D', 3.0);
-		g.addEdge('B', 'E', 4.0);
-		g.addEdge('D', 'E', 8.0);
-		g.addEdge('D', 'C', 7.0);
-		g.addEdge('C', 'E', 2.0);
-		g.addEdge('C', 'A', 4.0);
-		g.addEdge('A', 'E', 3.0);
-		
-		double[][] w = g.FloydWarshall(g.getWeightMatrix()); 
-		
-		for (int i = 0; i < w.length; i++) {
-			for (int j = 0; j < w.length; j++) {
-				System.out.print(w[i][j]+" "); //RESPUESTA CORRECTA YA LA VERIFIQUE imprimir respuesta
-			}
-			System.out.println();
-		}
-		
-		*/
-		
-
 		Scene scene = new Scene(root);
 		stage.setTitle("Login");
 		stage.setScene(scene);
