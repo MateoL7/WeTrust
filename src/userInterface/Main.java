@@ -1,15 +1,13 @@
 package userInterface;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
+//import myCollections.AdjacencyListGraph;
+//import myCollections.AdjacencyMatrixGraph;
 import javafx.stage.Stage;
-import myCollections.AdjacencyListGraph;
-import myCollections.AdjacencyMatrixGraph;
 import myExceptions.EmployeeAlreadyCreatedException;
 import myExceptions.EmployeeNotRegisteredException;
 
